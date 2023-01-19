@@ -1,3 +1,5 @@
+import {TextStyle} from 'react-native';
+
 const primaryFontFamily = 'Lato';
 
 const size = {
@@ -7,10 +9,10 @@ const size = {
   xlg: 32,
 };
 
-const weight = {
+const weight: {[key: string]: TextStyle['fontWeight']} = {
   light: '300',
-  bold: 'bold',
   medium: '500',
+  bold: '900',
 };
 
 export default {size, weight, primaryFontFamily};
