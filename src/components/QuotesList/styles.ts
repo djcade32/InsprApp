@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     fontSize: fonts.size.md,
   },
   quoteContainer: {
-    backgroundColor: colors.darkGreen,
     width: 320,
     height: 190,
     borderRadius: 10,

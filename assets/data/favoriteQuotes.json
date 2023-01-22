@@ -14,7 +14,7 @@
       "author": "Emmanuel Acho",
       "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque porro doloremque.",
       "category": "Motivation",
-      "favorite": false
+      "favorite": true
     }
   },
   {
@@ -23,7 +23,7 @@
       "author": "Duke Richard",
       "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque porro doloremque.",
       "category": "Finance",
-      "favorite": false
+      "favorite": true
     }
   },
   {

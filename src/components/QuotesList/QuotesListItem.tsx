@@ -1,22 +1,24 @@
+// This is used within the quoteslist component to display a single quote.
+
 import {View, Pressable} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../theme/colors';
 import StyledText from '../StyledText/StyledText';
+import {IQuote} from '../../interfaces/quotesList';
 
-interface IQuote {
-  item: {
-    key: string;
-    author: string;
-    text: string;
-    category: string;
-  };
-}
-
-const QuotesListItem = ({item}: IQuote) => {
+const QuotesListItem = ({item, color = ''}: IQuote) => {
+  // True if color prop is being used and false if it is not
+  const overrideColor = !!color;
   return (
-    <Pressable style={styles.quoteContainer}>
+    <Pressable
+      style={[
+        styles.quoteContainer,
+        overrideColor
+          ? {backgroundColor: color}
+          : {backgroundColor: colors.darkGreen},
+      ]}>
       <StyledText numberOfLines={3} style={styles.quoteText}>
         {item.text}
       </StyledText>
@@ -34,7 +36,7 @@ const QuotesListItem = ({item}: IQuote) => {
         </View>
         <MaterialCommunityIcons
           size={35}
-          name="bookmark-outline"
+          name={item.favorite ? 'bookmark' : 'bookmark-outline'}
           style={{color: colors.mintGreen}}
         />
       </View>
