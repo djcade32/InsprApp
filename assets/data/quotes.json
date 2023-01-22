@@ -1,0 +1,26 @@
+[
+  {
+    "key": "quote1",
+    "author": "Daniel Chi",
+    "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque porro doloremque voluptatem facilis perferendis eaque?",
+    "category": "Health"
+  },
+  {
+    "key": "quote2",
+    "author": "Emmanuel Acho",
+    "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque porro doloremque.",
+    "category": "Motivation"
+  },
+  {
+    "key": "quote3",
+    "author": "Duke Richard",
+    "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque porro doloremque.",
+    "category": "Finance"
+  },
+  {
+    "key": "quote4",
+    "author": "Bernie Lee",
+    "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque porro doloremque voluptatem facilis perferendis eaque?",
+    "category": "Finance"
+  }
+]
