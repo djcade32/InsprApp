@@ -6,7 +6,6 @@ import colors from '../../theme/colors';
 const styles = StyleSheet.create({
   screen: {
     marginHorizontal: spacing.sm,
-    // paddingRight: spacing.sm,
   },
   headerContainer: {
     paddingTop: spacing.xsm,
@@ -17,7 +16,9 @@ const styles = StyleSheet.create({
     fontWeight: fonts.weight.medium,
     textAlign: 'center',
   },
-  categoriesContainer: {},
+  categoriesContainer: {
+    marginBottom: spacing.md,
+  },
   categoriesTitle: {
     fontSize: fonts.size.lg,
   },
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     fontSize: fonts.size.sm,
     color: colors.grey,
     marginLeft: 'auto',
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
   },
   categoryContainer: {
     backgroundColor: colors.mintGreen,
@@ -42,6 +43,37 @@ const styles = StyleSheet.create({
   categoryText: {
     textAlign: 'center',
     fontSize: fonts.size.md,
+  },
+  quoteContainer: {
+    backgroundColor: colors.darkGreen,
+    width: 320,
+    height: 190,
+    borderRadius: 10,
+    marginHorizontal: 10,
+    padding: spacing.xsm,
+    justifyContent: 'space-between',
+  },
+  quoteText: {
+    fontSize: fonts.size.sm,
+    color: 'white',
+    lineHeight: spacing.lg,
+  },
+  quoteAuthor: {
+    fontSize: fonts.size.sm,
+    fontWeight: fonts.weight.light,
+    color: 'white',
+  },
+  categoryBadgeContainer: {
+    backgroundColor: colors.mintGreen,
+    width: 100,
+    borderRadius: 10,
+    justifyContent: 'center',
+    height: 25,
+  },
+  categoryBadgeText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: fonts.size.sm,
   },
 });
 

@@ -9,6 +9,7 @@ const StyledText = (props?: TextProps) => {
   const isColorProp = !!styleProp?.color;
   return (
     <Text
+      numberOfLines={props?.numberOfLines}
       style={[
         props?.style,
         isColorProp ? styles.textCustom : styles.textDefault,
