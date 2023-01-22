@@ -2,7 +2,10 @@ import {FlatList, Pressable, View} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import StyledText from '../../components/StyledText/StyledText';
-import spacing from '../../theme/spacing';
+import QUOTES_LIST from '../../../assets/data/quotes.json';
+import FAVORITE_QUOTES_LIST from '../../../assets/data/favoriteQuotes.json';
+import QuotesList from '../../components/QuotesList/QuotesList';
+import colors from '../../theme/colors';
 
 const CATEGORIES_LIST = [
   'Art',
@@ -40,6 +43,24 @@ const HomeScreen = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
+      </View>
+      {/* Your quotes list */}
+      <View style={styles.categoriesContainer}>
+        <View style={{flexDirection: 'row'}}>
+          <StyledText style={styles.categoriesTitle}>Your quotes</StyledText>
+          <StyledText style={styles.viewAllButton}>View all</StyledText>
+        </View>
+        <QuotesList data={QUOTES_LIST} />
+      </View>
+      {/* Favorite quotes list */}
+      <View style={styles.categoriesContainer}>
+        <View style={{flexDirection: 'row'}}>
+          <StyledText style={styles.categoriesTitle}>
+            Favorite quotes
+          </StyledText>
+          <StyledText style={styles.viewAllButton}>View all</StyledText>
+        </View>
+        <QuotesList data={FAVORITE_QUOTES_LIST} color={colors.red} />
       </View>
     </View>
   );

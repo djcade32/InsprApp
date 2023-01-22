@@ -6,7 +6,6 @@ import colors from '../../theme/colors';
 const styles = StyleSheet.create({
   screen: {
     marginHorizontal: spacing.sm,
-    // paddingRight: spacing.sm,
   },
   headerContainer: {
     paddingTop: spacing.xsm,
@@ -17,7 +16,9 @@ const styles = StyleSheet.create({
     fontWeight: fonts.weight.medium,
     textAlign: 'center',
   },
-  categoriesContainer: {},
+  categoriesContainer: {
+    marginBottom: spacing.md,
+  },
   categoriesTitle: {
     fontSize: fonts.size.lg,
   },
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     fontSize: fonts.size.sm,
     color: colors.grey,
     marginLeft: 'auto',
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
   },
   categoryContainer: {
     backgroundColor: colors.mintGreen,
