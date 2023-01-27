@@ -7,6 +7,7 @@ const size = {
   md: 20,
   lg: 24,
   xlg: 32,
+  xxlg: 48,
 };
 
 const weight: {[key: string]: TextStyle['fontWeight']} = {
