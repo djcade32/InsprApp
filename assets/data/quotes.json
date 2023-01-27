@@ -2,9 +2,9 @@
   {
     "item": {
       "key": "quote1",
-      "author": "Daniel Chi",
-      "text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque porro doloremque voluptatem facilis perferendis eaque?",
-      "category": "Health",
+      "author": "Warren Buffett",
+      "text": "I will tell you the secret to getting rich on Wall Street. You try to be greedy when others are fearful. And you try to be fearful when others are greedy.",
+      "category": "Finance",
       "favorite": true
     }
   },

@@ -1,5 +1,5 @@
 export interface IHeaderNavigation {
   leftButton?: any;
-  title: string;
+  title?: string;
   rightButton?: any;
 }
