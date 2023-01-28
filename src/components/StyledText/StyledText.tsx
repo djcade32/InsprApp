@@ -8,10 +8,12 @@ const StyledText = (props?: TextProps) => {
   const styleProp = props?.style as TextStyle | [TextStyle];
   let isColorProp = false;
 
-  // This takes is to catch if an array of style objects were used
+  // This is to catch if an array of style objects were used.
+  // It takes the first color property that is found.
   if (Array.isArray(styleProp)) {
     for (const styleObject of styleProp) {
       isColorProp = !!styleObject?.color;
+      break;
     }
   } else {
     isColorProp = !!styleProp?.color;
