@@ -1,10 +1,4 @@
-import {
-  View,
-  TextInput,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Pressable,
-} from 'react-native';
+import {View, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
 import StyledText from '../../components/StyledText/StyledText';

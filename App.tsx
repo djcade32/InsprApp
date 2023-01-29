@@ -13,6 +13,7 @@ import QuotesScreen from './src/screens/QuotesScreen/QuotesScreen';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import {MenuProvider} from 'react-native-popup-menu';
 import CreateQuoteScreen from './src/screens/CreateQuoteScreen/CreateQuoteScreen';
+import ProfileScreen from './src/screens/ProfileScreen/ProfileScreen';
 
 const App = () => {
   return (
@@ -22,7 +23,8 @@ const App = () => {
         {/* <CategoriesScreen /> */}
         {/* <QuotesScreen title={'Motivation'} /> */}
         {/* <QuoteScreen /> */}
-        <CreateQuoteScreen />
+        {/* <CreateQuoteScreen /> */}
+        <ProfileScreen />
       </MenuProvider>
     </SafeAreaView>
   );
