@@ -9,12 +9,15 @@ const HeaderNavigation = ({
   leftButton,
   title,
   rightButton,
+  showBackButton = true,
 }: IHeaderNavigation) => {
   return (
     <View style={styles.container}>
-      <View style={styles.leftButton}>
-        {leftButton ? leftButton : <Octicons name="arrow-left" size={35} />}
-      </View>
+      {showBackButton && (
+        <View style={styles.leftButton}>
+          {leftButton ? leftButton : <Octicons name="arrow-left" size={35} />}
+        </View>
+      )}
 
       <StyledText style={styles.title}>{title}</StyledText>
       <View style={styles.rightButton}>{rightButton}</View>
