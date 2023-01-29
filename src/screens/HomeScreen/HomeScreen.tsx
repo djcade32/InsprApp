@@ -6,6 +6,8 @@ import QUOTES_LIST from '../../../assets/data/quotes.json';
 import FAVORITE_QUOTES_LIST from '../../../assets/data/favoriteQuotes.json';
 import QuotesList from '../../components/QuotesList/QuotesList';
 import colors from '../../theme/colors';
+import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
+import fonts from '../../theme/fonts';
 
 const CATEGORIES_LIST = [
   'Art',
@@ -21,9 +23,15 @@ const CATEGORIES_LIST = [
 const HomeScreen = () => {
   return (
     <View style={styles.screen}>
-      <View style={styles.headerContainer}>
+      <HeaderNavigation
+        title="Inspr"
+        showBackButton={false}
+        boldTitle
+        titleSize={fonts.size.xlg}
+      />
+      {/* <View style={styles.headerContainer}>
         <StyledText style={styles.headerTitle}>Inspr</StyledText>
-      </View>
+      </View> */}
       {/* Categories list */}
       <View style={styles.categoriesContainer}>
         <View style={{flexDirection: 'row'}}>

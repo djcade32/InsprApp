@@ -22,7 +22,7 @@ const createButton = (
 
 const CategoriesScreen = () => {
   return (
-    <View>
+    <View style={{backgroundColor: 'white'}}>
       <HeaderNavigation title={'Categories'} rightButton={createButton} />
       <FlatList
         style={{height: '100%', paddingTop: spacing.sm}}

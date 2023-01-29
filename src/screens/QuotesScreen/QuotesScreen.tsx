@@ -9,7 +9,7 @@ import {IQuotesScreen} from '../../interfaces/quotesScreenInterface';
 
 const QuotesScreen = ({title}: IQuotesScreen) => {
   return (
-    <View>
+    <View style={{backgroundColor: 'white'}}>
       <HeaderNavigation title={title} />
       <FlatList
         style={{marginHorizontal: spacing.xsm, height: '100%'}}

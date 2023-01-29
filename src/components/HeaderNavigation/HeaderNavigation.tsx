@@ -4,12 +4,15 @@ import styles from './styles';
 import StyledText from '../StyledText/StyledText';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {IHeaderNavigation} from '../../interfaces/headerNavigationInterfaces';
+import fonts from '../../theme/fonts';
 
 const HeaderNavigation = ({
   leftButton,
   title,
   rightButton,
   showBackButton = true,
+  boldTitle = false,
+  titleSize,
 }: IHeaderNavigation) => {
   return (
     <View style={styles.container}>
@@ -19,7 +22,14 @@ const HeaderNavigation = ({
         </View>
       )}
 
-      <StyledText style={styles.title}>{title}</StyledText>
+      <StyledText
+        style={[
+          styles.title,
+          boldTitle && {fontWeight: fonts.weight.bold},
+          !!titleSize && {fontSize: titleSize},
+        ]}>
+        {title}
+      </StyledText>
       <View style={styles.rightButton}>{rightButton}</View>
     </View>
   );
