@@ -25,7 +25,7 @@ const HeaderNavigation = ({
       <StyledText
         style={[
           styles.title,
-          boldTitle && {fontWeight: fonts.weight.bold},
+          boldTitle && {fontWeight: fonts.weight.medium},
           !!titleSize && {fontSize: titleSize},
         ]}>
         {title}
