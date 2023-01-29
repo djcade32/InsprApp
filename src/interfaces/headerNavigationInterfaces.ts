@@ -3,4 +3,6 @@ export interface IHeaderNavigation {
   title?: string;
   rightButton?: any;
   showBackButton?: boolean;
+  boldTitle?: boolean;
+  titleSize?: number;
 }

@@ -4,8 +4,9 @@ import spacing from '../../theme/spacing';
 
 const styles = StyleSheet.create({
   screen: {
-    marginHorizontal: spacing.sm,
+    paddingHorizontal: spacing.sm,
     flex: 1,
+    backgroundColor: 'white',
   },
   inputForm: {
     flex: 1,

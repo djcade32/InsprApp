@@ -4,10 +4,10 @@ import styles from './styles';
 import StyledText from '../../components/StyledText/StyledText';
 import colors from '../../theme/colors';
 import fonts from '../../theme/fonts';
-import spacing from '../../theme/spacing';
 import DropDownPicker from 'react-native-dropdown-picker';
 import StyledTextInput from '../../components/TextInput/StyledTextInput';
 import StyledButton from '../../components/StyledButton/StyledButton';
+import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
 
 const CreateQuoteScreen = () => {
   const [open, setOpen] = useState(false);
@@ -24,22 +24,15 @@ const CreateQuoteScreen = () => {
   ]);
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+        setOpen(!open);
+      }}>
       <View style={styles.screen}>
-        <View style={styles.headerContainer}>
-          <StyledText style={styles.headerTitle}>Create quote</StyledText>
-        </View>
+        <HeaderNavigation title="Create quote" showBackButton={false} />
         <View style={styles.inputForm}>
-          <StyledTextInput
-            labelText="Author (optional)"
-            placeholder="Who said the quote?"
-          />
-          <StyledTextInput
-            multiline
-            labelText="Quote"
-            placeholder="What was said?"
-          />
-          <View>
+          <View style={{zIndex: 1}}>
             <StyledText style={{fontSize: fonts.size.md, marginBottom: 10}}>
               Category
             </StyledText>
@@ -59,6 +52,16 @@ const CreateQuoteScreen = () => {
               }}
             />
           </View>
+          <StyledTextInput
+            labelText="Author (optional)"
+            placeholder="Who said the quote?"
+          />
+          <StyledTextInput
+            multiline
+            labelText="Quote"
+            placeholder="What was said?"
+          />
+
           <StyledButton text="Create" />
         </View>
       </View>

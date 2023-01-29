@@ -1,4 +1,10 @@
-import {View, Pressable, Button} from 'react-native';
+import {
+  View,
+  Pressable,
+  Button,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
@@ -18,20 +24,22 @@ const signOutButton = (
 
 const ProfileScreen = () => {
   return (
-    <View style={{flex: 1}}>
-      <HeaderNavigation
-        title="Profile"
-        showBackButton={false}
-        rightButton={signOutButton}
-      />
-      <View style={styles.inputForm}>
-        <StyledTextInput labelText="First name" placeholder="First name" />
-        <StyledTextInput labelText="Last name" placeholder="Last name" />
-        <StyledTextInput labelText="Email" placeholder="Email" />
-        <StyledButton text="Edit" />
-        <Button title="Delete account" color={colors.grey} />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+        <HeaderNavigation
+          title="Profile"
+          showBackButton={false}
+          rightButton={signOutButton}
+        />
+        <View style={styles.inputForm}>
+          <StyledTextInput labelText="First name" placeholder="First name" />
+          <StyledTextInput labelText="Last name" placeholder="Last name" />
+          <StyledTextInput labelText="Email" placeholder="Email" />
+          <StyledButton text="Edit" />
+          <Button title="Delete account" color={colors.grey} />
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
