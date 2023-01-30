@@ -5,6 +5,7 @@ import colors from '../../theme/colors';
 
 const styles = StyleSheet.create({
   screen: {
+    flex: 1,
     paddingHorizontal: spacing.sm,
     backgroundColor: 'white',
   },

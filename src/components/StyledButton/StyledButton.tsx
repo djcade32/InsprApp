@@ -8,11 +8,28 @@ import StyledText from '../StyledText/StyledText';
 interface IStyledButton {
   text: string;
   color?: string;
+  size?: string;
+  onPress: Function;
 }
 
-const StyledButton = ({color = '', text}: IStyledButton) => {
+const StyledButton = ({color = '', text, size, onPress}: IStyledButton) => {
+  let width = 265;
+  switch (size) {
+    case 'medium':
+      width = 150;
+      break;
+
+    case 'small':
+      width = 100;
+      break;
+
+    default:
+      break;
+  }
   return (
-    <Pressable style={styles.container}>
+    <Pressable
+      style={[styles.container, !!size && {width: width}]}
+      onPress={onPress}>
       <StyledText style={[styles.text, !!color && {backgroundColor: color}]}>
         {text}
       </StyledText>

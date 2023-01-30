@@ -12,4 +12,5 @@ export interface IQuote {
     favorite: boolean;
   };
   color?: string;
+  screen?: string;
 }

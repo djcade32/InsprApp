@@ -5,34 +5,47 @@ import StyledText from '../../components/StyledText/StyledText';
 import colors from '../../theme/colors';
 import styles from './styles';
 import {IQuote} from '../../interfaces/quotesList';
+import {useNavigation} from '@react-navigation/native';
 
-const QuotesScreenItem = ({item, color = ''}: IQuote) => {
+const QuotesScreenItem = ({item, color = '', screen = ''}: IQuote) => {
+  const navigation = useNavigation();
   // True if color prop is being used and false if it is not
   const isFavoriteScreen = !!color;
+  const isYourQuotesScreen = screen === 'Your quotes';
+
+  function navigateToQuoteScreen() {
+    navigation.navigate('QuoteScreen');
+  }
   return (
     <Pressable
       style={[
         styles.quoteContainer,
         isFavoriteScreen
-          ? {backgroundColor: color, height: 165}
+          ? {backgroundColor: color}
           : {backgroundColor: colors.darkGreen},
-      ]}>
+        isFavoriteScreen || isYourQuotesScreen ? {height: 165} : {},
+      ]}
+      onPress={navigateToQuoteScreen}>
       <StyledText numberOfLines={3} style={styles.quoteText}>
         {item.text}
       </StyledText>
       <View
         style={[
           styles.quoteFooter,
-          isFavoriteScreen && {alignItems: 'flex-end', marginBottom: 10},
+          isFavoriteScreen || isYourQuotesScreen
+            ? {alignItems: 'flex-end', marginBottom: 10}
+            : {},
         ]}>
         <View style={!isFavoriteScreen && {alignSelf: 'center'}}>
           <StyledText style={styles.quoteAuthor}>- {item.author}</StyledText>
-          {isFavoriteScreen && (
+          {isFavoriteScreen || isYourQuotesScreen ? (
             <View style={styles.categoryBadgeContainer}>
               <StyledText style={styles.categoryBadgeText}>
                 {item.category}
               </StyledText>
             </View>
+          ) : (
+            <></>
           )}
         </View>
         <MaterialCommunityIcons

@@ -7,10 +7,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import colors from '../../theme/colors';
 import StyledText from '../StyledText/StyledText';
 import {IQuote} from '../../interfaces/quotesList';
+import {useNavigation} from '@react-navigation/native';
 
 const QuotesListItem = ({item, color = ''}: IQuote) => {
+  const navigation = useNavigation();
   // True if color prop is being used and false if it is not
   const overrideColor = !!color;
+
+  function navigateToQuoteScreen() {
+    navigation.navigate('QuoteScreen');
+  }
   return (
     <Pressable
       style={[
@@ -18,7 +24,8 @@ const QuotesListItem = ({item, color = ''}: IQuote) => {
         overrideColor
           ? {backgroundColor: color}
           : {backgroundColor: colors.darkGreen},
-      ]}>
+      ]}
+      onPress={navigateToQuoteScreen}>
       <StyledText numberOfLines={3} style={styles.quoteText}>
         {item.text}
       </StyledText>

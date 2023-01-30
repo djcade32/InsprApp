@@ -8,6 +8,7 @@ import QuotesList from '../../components/QuotesList/QuotesList';
 import colors from '../../theme/colors';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
 import fonts from '../../theme/fonts';
+import {useNavigation} from '@react-navigation/native';
 
 const CATEGORIES_LIST = [
   'Art',
@@ -21,6 +22,18 @@ const CATEGORIES_LIST = [
 ];
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  function navigateToCategoriesScreen() {
+    navigation.navigate('CategoriesScreen');
+  }
+
+  function navigateToQuotesScreen(item: string) {
+    navigation.navigate('QuotesScreen', {
+      title: item,
+    });
+  }
+
   return (
     <View style={styles.screen}>
       <HeaderNavigation
@@ -29,21 +42,24 @@ const HomeScreen = () => {
         boldTitle
         titleSize={fonts.size.xlg}
       />
-      {/* <View style={styles.headerContainer}>
-        <StyledText style={styles.headerTitle}>Inspr</StyledText>
-      </View> */}
       {/* Categories list */}
       <View style={styles.categoriesContainer}>
         <View style={{flexDirection: 'row'}}>
           <StyledText style={styles.categoriesTitle}>Categories</StyledText>
-          <StyledText style={styles.viewAllButton}>View all</StyledText>
+          <StyledText
+            style={styles.viewAllButton}
+            onPress={navigateToCategoriesScreen}>
+            View all
+          </StyledText>
         </View>
         <FlatList
           style={styles.categoriesList}
           data={CATEGORIES_LIST}
           renderItem={({item}) => {
             return (
-              <Pressable style={styles.categoryContainer}>
+              <Pressable
+                style={styles.categoryContainer}
+                onPress={() => navigateToQuotesScreen(item)}>
                 <StyledText style={styles.categoryText}>{item}</StyledText>
               </Pressable>
             );
@@ -56,7 +72,11 @@ const HomeScreen = () => {
       <View style={styles.categoriesContainer}>
         <View style={{flexDirection: 'row'}}>
           <StyledText style={styles.categoriesTitle}>Your quotes</StyledText>
-          <StyledText style={styles.viewAllButton}>View all</StyledText>
+          <StyledText
+            style={styles.viewAllButton}
+            onPress={() => navigateToQuotesScreen('Your quotes')}>
+            View all
+          </StyledText>
         </View>
         <QuotesList data={QUOTES_LIST} />
       </View>
@@ -66,7 +86,11 @@ const HomeScreen = () => {
           <StyledText style={styles.categoriesTitle}>
             Favorite quotes
           </StyledText>
-          <StyledText style={styles.viewAllButton}>View all</StyledText>
+          <StyledText
+            style={styles.viewAllButton}
+            onPress={() => navigateToQuotesScreen('Favorite')}>
+            View all
+          </StyledText>
         </View>
         <QuotesList data={FAVORITE_QUOTES_LIST} color={colors.red} />
       </View>
