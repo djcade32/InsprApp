@@ -21,6 +21,7 @@ const StyledText = (props?: TextProps) => {
 
   return (
     <Text
+      onPress={props?.onPress}
       suppressHighlighting
       numberOfLines={props?.numberOfLines}
       style={[

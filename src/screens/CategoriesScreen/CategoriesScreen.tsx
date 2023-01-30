@@ -1,9 +1,16 @@
-import {View, FlatList} from 'react-native';
-import React from 'react';
+import {
+  View,
+  FlatList,
+  Pressable,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import React, {useState} from 'react';
 import styles from './styles';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
 import StyledText from '../../components/StyledText/StyledText';
 import spacing from '../../theme/spacing';
+import {useNavigation} from '@react-navigation/native';
+import CreateCategoryModal from '../../components/CreateCategoryModal/CreateCategoryModal';
 
 const CATEGORIES_LIST = [
   'Art',
@@ -16,14 +23,34 @@ const CATEGORIES_LIST = [
   'Motivation',
 ];
 
-const createButton = (
-  <StyledText style={styles.createButton}>Create</StyledText>
-);
-
 const CategoriesScreen = () => {
+  const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const createButton = (
+    <StyledText
+      style={styles.createButton}
+      onPress={() => setModalVisible(!modalVisible)}>
+      Create
+    </StyledText>
+  );
+
+  function navigateToQuotesScreen(item: string) {
+    navigation.navigate('QuotesScreen', {
+      title: item,
+    });
+  }
   return (
     <View style={{backgroundColor: 'white'}}>
-      <HeaderNavigation title={'Categories'} rightButton={createButton} />
+      <HeaderNavigation
+        title={'Categories'}
+        rightButton={createButton}
+        showBackButton
+      />
+      <CreateCategoryModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
       <FlatList
         style={{height: '100%', paddingTop: spacing.sm}}
         columnWrapperStyle={{
@@ -33,9 +60,11 @@ const CategoriesScreen = () => {
         contentContainerStyle={{alignItems: 'center'}}
         data={CATEGORIES_LIST}
         renderItem={({item}) => (
-          <View style={styles.categoryContainer}>
+          <Pressable
+            style={styles.categoryContainer}
+            onPress={() => navigateToQuotesScreen(item)}>
             <StyledText style={styles.categoryText}>{item}</StyledText>
-          </View>
+          </Pressable>
         )}
         numColumns={2}
       />

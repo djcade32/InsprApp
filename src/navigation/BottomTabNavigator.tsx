@@ -1,11 +1,11 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import colors from '../theme/colors';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import CreateQuoteScreen from '../screens/CreateQuoteScreen/CreateQuoteScreen';
+import HomeStackNavigator from './HomeStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,12 +16,12 @@ const BottomTabNavigator = () => {
         headerShown: false,
         tabBarActiveTintColor: colors.darkGreen,
         tabBarInactiveTintColor: colors.black,
+        tabBarShowLabel: false,
       }}>
       <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="HomeStackNavigator"
+        component={HomeStackNavigator}
         options={{
-          tabBarShowLabel: false,
           tabBarIcon: ({color}) => (
             <Octicons name="home" size={35} color={color} />
           ),
@@ -31,9 +31,8 @@ const BottomTabNavigator = () => {
         name="CreateQuote"
         component={CreateQuoteScreen}
         options={{
-          tabBarShowLabel: false,
           tabBarIcon: ({color}) => (
-            <AntDesign name="pluscircleo" size={35} color={color} />
+            <Feather name="plus-square" size={40} color={color} />
           ),
         }}
       />
@@ -41,7 +40,6 @@ const BottomTabNavigator = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarShowLabel: false,
           tabBarIcon: ({color}) => (
             <FontAwesome name="user-o" size={35} color={color} />
           ),
