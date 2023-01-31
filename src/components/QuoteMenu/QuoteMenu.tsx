@@ -1,4 +1,4 @@
-import {Alert, Touchable, TouchableWithoutFeedback} from 'react-native';
+import {Alert} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import {

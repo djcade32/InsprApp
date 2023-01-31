@@ -6,8 +6,9 @@ import colors from '../theme/colors';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 import CreateQuoteScreen from '../screens/CreateQuoteScreen/CreateQuoteScreen';
 import HomeStackNavigator from './HomeStackNavigator';
+import {BottomTabNavigatorParamList} from './types/BottomTabNavigatorParamList';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
 
 const BottomTabNavigator = () => {
   return (

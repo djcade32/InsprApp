@@ -11,6 +11,7 @@ import StyledText from '../../components/StyledText/StyledText';
 import spacing from '../../theme/spacing';
 import {useNavigation} from '@react-navigation/native';
 import CreateCategoryModal from '../../components/CreateCategoryModal/CreateCategoryModal';
+import {CategoriesScreenProp} from '../../navigation/types/HomeStackNavigatorParamList';
 
 const CATEGORIES_LIST = [
   'Art',
@@ -24,7 +25,7 @@ const CATEGORIES_LIST = [
 ];
 
 const CategoriesScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<CategoriesScreenProp>();
   const [modalVisible, setModalVisible] = useState(false);
 
   const createButton = (
