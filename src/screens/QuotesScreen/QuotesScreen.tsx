@@ -7,9 +7,10 @@ import colors from '../../theme/colors';
 import QuotesScreenItem from './QuotesScreenItem';
 import {IQuotesScreen} from '../../interfaces/quotesScreenInterface';
 import {useRoute} from '@react-navigation/native';
+import {QuotesScreenRouteProp} from '../../navigation/types/HomeStackNavigatorParamList';
 
 const QuotesScreen = () => {
-  const route = useRoute();
+  const route = useRoute<QuotesScreenRouteProp>();
   const title = route.params?.title;
   return (
     <View style={{backgroundColor: 'white'}}>

@@ -1,19 +1,19 @@
-import {
-  View,
-  Text,
-  Modal,
-  Alert,
-  Pressable,
-  TextInput,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import React, {useState} from 'react';
+import {View, Modal, Alert, Pressable, TextInput} from 'react-native';
+import React from 'react';
 import styles from './styles';
 import StyledText from '../StyledText/StyledText';
 import StyledButton from '../StyledButton/StyledButton';
 import colors from '../../theme/colors';
 
-const CreateCategoryModal = ({modalVisible, setModalVisible}) => {
+interface ICreateCategoryModal {
+  modalVisible: boolean;
+  setModalVisible: Function;
+}
+
+const CreateCategoryModal = ({
+  modalVisible,
+  setModalVisible,
+}: ICreateCategoryModal) => {
   return (
     <Modal
       animationType="fade"

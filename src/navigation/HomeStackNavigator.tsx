@@ -4,8 +4,9 @@ import CategoriesScreen from '../screens/CategoriesScreen/CategoriesScreen';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import QuoteScreen from '../screens/QuoteScreen/QuoteScreen';
 import QuotesScreen from '../screens/QuotesScreen/QuotesScreen';
+import {HomeStackNavigatorParamList} from './types/HomeStackNavigatorParamList';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<HomeStackNavigatorParamList>();
 
 const HomeStackNavigator = () => {
   return (
@@ -19,10 +20,5 @@ const HomeStackNavigator = () => {
     </Stack.Navigator>
   );
 };
-
-// navigation.navigate('UserFollow', {
-//     id: user.id,
-//     screen: 'Followings',
-//   })
 
 export default HomeStackNavigator;

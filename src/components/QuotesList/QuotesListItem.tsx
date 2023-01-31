@@ -8,9 +8,10 @@ import colors from '../../theme/colors';
 import StyledText from '../StyledText/StyledText';
 import {IQuote} from '../../interfaces/quotesList';
 import {useNavigation} from '@react-navigation/native';
+import {QuotesScreenItemProp} from '../../navigation/types/HomeStackNavigatorParamList';
 
 const QuotesListItem = ({item, color = ''}: IQuote) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<QuotesScreenItemProp>();
   // True if color prop is being used and false if it is not
   const overrideColor = !!color;
 

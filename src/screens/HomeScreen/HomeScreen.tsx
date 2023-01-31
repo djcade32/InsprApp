@@ -9,6 +9,7 @@ import colors from '../../theme/colors';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
 import fonts from '../../theme/fonts';
 import {useNavigation} from '@react-navigation/native';
+import {HomeScreenProp} from '../../navigation/types/HomeStackNavigatorParamList';
 
 const CATEGORIES_LIST = [
   'Art',
@@ -22,7 +23,7 @@ const CATEGORIES_LIST = [
 ];
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeScreenProp>();
 
   function navigateToCategoriesScreen() {
     navigation.navigate('CategoriesScreen');

@@ -1,4 +1,4 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, GestureResponderEvent} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import colors from '../../theme/colors';
@@ -9,7 +9,7 @@ interface IStyledButton {
   text: string;
   color?: string;
   size?: string;
-  onPress: Function;
+  onPress: (event: GestureResponderEvent) => void;
 }
 
 const StyledButton = ({color = '', text, size, onPress}: IStyledButton) => {
