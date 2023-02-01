@@ -1,18 +1,16 @@
-import {View, Text, Pressable, GestureResponderEvent} from 'react-native';
+import {Pressable} from 'react-native';
 import React from 'react';
 import styles from './styles';
-import colors from '../../theme/colors';
-import fonts from '../../theme/fonts';
 import StyledText from '../StyledText/StyledText';
+import {IStyledButton} from '../../interfaces/styledButtonInterface';
 
-interface IStyledButton {
-  text: string;
-  color?: string;
-  size?: string;
-  onPress: (event: GestureResponderEvent) => void;
-}
-
-const StyledButton = ({color = '', text, size, onPress}: IStyledButton) => {
+const StyledButton = ({
+  color = '',
+  text,
+  size,
+  onPress,
+  containerStyle,
+}: IStyledButton) => {
   let width = 265;
   switch (size) {
     case 'medium':
@@ -28,7 +26,7 @@ const StyledButton = ({color = '', text, size, onPress}: IStyledButton) => {
   }
   return (
     <Pressable
-      style={[styles.container, !!size && {width: width}]}
+      style={[styles.container, containerStyle, !!size && {width: width}]}
       onPress={onPress}>
       <StyledText style={[styles.text, !!color && {backgroundColor: color}]}>
         {text}
