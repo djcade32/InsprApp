@@ -11,7 +11,7 @@ import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation
 import StyledText from '../../components/StyledText/StyledText';
 import fonts from '../../theme/fonts';
 import colors from '../../theme/colors';
-import StyledTextInput from '../../components/TextInput/StyledTextInput';
+import StyledTextInput from '../../components/StyledTextInput/StyledTextInput';
 import StyledButton from '../../components/StyledButton/StyledButton';
 
 const signOutButton = (

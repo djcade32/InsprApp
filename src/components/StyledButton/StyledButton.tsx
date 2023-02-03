@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './styles';
 import StyledText from '../StyledText/StyledText';
 import {IStyledButton} from '../../interfaces/styledButtonInterface';
+import colors from '../../theme/colors';
 
 const StyledButton = ({
   color = '',
@@ -10,6 +11,7 @@ const StyledButton = ({
   size,
   onPress,
   containerStyle,
+  disabled = false,
 }: IStyledButton) => {
   let width = 265;
   switch (size) {
@@ -26,9 +28,15 @@ const StyledButton = ({
   }
   return (
     <Pressable
+      disabled={disabled}
       style={[styles.container, containerStyle, !!size && {width: width}]}
       onPress={onPress}>
-      <StyledText style={[styles.text, !!color && {backgroundColor: color}]}>
+      <StyledText
+        style={
+          disabled
+            ? [styles.text, {backgroundColor: colors.grey}]
+            : [styles.text, !!color && {backgroundColor: color}]
+        }>
         {text}
       </StyledText>
     </Pressable>

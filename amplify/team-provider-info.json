@@ -10,6 +10,11 @@
       "StackName": "amplify-insprapp-staging-215308",
       "StackId": "arn:aws:cloudformation:us-east-1:061561016350:stack/amplify-insprapp-staging-215308/d0a90100-a27a-11ed-bf14-0a5bc67a48f3",
       "AmplifyAppId": "d1qwidhohh5cp5"
+    },
+    "categories": {
+      "auth": {
+        "INSPRApp": {}
+      }
     }
   }
 }

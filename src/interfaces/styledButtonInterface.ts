@@ -6,4 +6,5 @@ export interface IStyledButton {
   size?: string;
   onPress: (event: GestureResponderEvent) => void;
   containerStyle?: StyleProp<ViewStyle>;
+  disabled?: boolean;
 }

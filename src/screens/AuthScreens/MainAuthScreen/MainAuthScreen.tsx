@@ -39,7 +39,7 @@ const MainAuthScreen = () => {
             color: colors.grey,
             marginTop: spacing.md,
           }}>
-          Forgot password
+          Forgot password?
         </StyledText>
       </View>
     </View>
