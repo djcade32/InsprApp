@@ -46,6 +46,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: fonts.size.md,
   },
+  noCategoriesContainer: {
+    backgroundColor: colors.mintGreen,
+    height: 70,
+    justifyContent: 'center',
+    borderRadius: 10,
+    width: 250,
+    alignSelf: 'center',
+    marginHorizontal: -spacing.sm,
+    marginTop: spacing.xsm,
+  },
 });
 
 export default styles;

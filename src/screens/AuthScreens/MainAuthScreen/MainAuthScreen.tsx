@@ -32,15 +32,6 @@ const MainAuthScreen = () => {
           color={colors.red}
           onPress={() => navigation.navigate('CreateAccountScreen')}
         />
-        <StyledText
-          style={{
-            textAlign: 'center',
-            fontSize: fonts.size.sm,
-            color: colors.grey,
-            marginTop: spacing.md,
-          }}>
-          Forgot password?
-        </StyledText>
       </View>
     </View>
   );

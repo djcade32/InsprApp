@@ -9,10 +9,20 @@
       "UnauthRoleName": "amplify-insprapp-staging-215308-unauthRole",
       "StackName": "amplify-insprapp-staging-215308",
       "StackId": "arn:aws:cloudformation:us-east-1:061561016350:stack/amplify-insprapp-staging-215308/d0a90100-a27a-11ed-bf14-0a5bc67a48f3",
-      "AmplifyAppId": "d1qwidhohh5cp5"
+      "AmplifyAppId": "d1qwidhohh5cp5",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-insprapp-staging-215308-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
+        "INSPRApp": {}
+      },
+      "function": {
+        "INSPRAppPostConfirmation": {
+          "deploymentBucketName": "amplify-insprapp-staging-215308-deployment",
+          "s3Key": "amplify-builds/INSPRAppPostConfirmation-6e7750754144376b7046-build.zip"
+        }
+      },
+      "api": {
         "INSPRApp": {}
       }
     }

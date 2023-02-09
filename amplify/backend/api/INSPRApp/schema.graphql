@@ -1,0 +1,26 @@
+type AllQuotes @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Quotes: [Quote] @hasMany(indexName: "byAllQuotes", fields: ["id"])
+  User: User @hasOne
+}
+
+type Quote @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  quote: String!
+  author: String
+  category: String!
+  userID: ID! @index(name: "byUser")
+  User: User @belongsTo(fields: ["userID"])
+  allquotesID: ID! @index(name: "byAllQuotes")
+  favorite: Boolean!
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  Quotes: [Quote] @hasMany(indexName: "byUser", fields: ["id"])
+  categories: [String!]
+}
+ 

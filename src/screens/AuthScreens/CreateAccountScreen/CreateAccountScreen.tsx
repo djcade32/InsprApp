@@ -49,11 +49,11 @@ const CreateAccountScreen = () => {
     }
     setLoading(true);
     try {
-      // await Auth.signUp({
-      //   username: email,
-      //   password,
-      //   attributes: {name: `${firstName} ${lastName}`, email},
-      // });
+      await Auth.signUp({
+        username: email,
+        password,
+        attributes: {name: `${firstName} ${lastName}`, email},
+      });
       reset();
       navigation.navigate('ConfirmEmailScreen', {email});
     } catch (e) {
@@ -143,8 +143,11 @@ const CreateAccountScreen = () => {
           />
           <StyledText
             style={styles.haveAccountButton}
-            onPress={() => navigation.navigate('SigninScreen')}>
-            Already have an account?
+            onPress={() => {
+              navigation.navigate('SigninScreen');
+              reset();
+            }}>
+            Already have an account? Sign in
           </StyledText>
         </View>
       </KeyboardAwareScrollView>

@@ -14,9 +14,6 @@ import FormInput from '../../../components/FormInput/FormInput';
 import {useForm} from 'react-hook-form';
 import {Auth} from 'aws-amplify';
 import StyledText from '../../../components/StyledText/StyledText';
-import colors from '../../../theme/colors';
-import fonts from '../../../theme/fonts';
-import spacing from '../../../theme/spacing';
 import {useNavigation} from '@react-navigation/native';
 import {SigninScreenProp} from '../../../navigation/types/AuthStackNavigatorParamList';
 
@@ -98,7 +95,7 @@ const SigninScreen = () => {
                 navigation.navigate('CreateAccountScreen');
                 reset();
               }}>
-              Don't have an account?
+              Don't have an account? Create one
             </StyledText>
           </View>
         </View>

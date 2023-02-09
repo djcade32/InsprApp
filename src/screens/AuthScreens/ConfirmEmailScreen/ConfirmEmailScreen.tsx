@@ -82,7 +82,7 @@ const ConfirmEmailScreen = () => {
         />
         <StyledButton
           color={colors.lightGreen}
-          text="Sign in"
+          text="Back to Sign in"
           onPress={() => navigation.navigate('SigninScreen')}
           containerStyle={{marginTop: spacing.sm}}
         />
