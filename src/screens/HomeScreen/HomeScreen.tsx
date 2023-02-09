@@ -1,5 +1,5 @@
 import {ActivityIndicator, FlatList, Pressable, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styles from './styles';
 import StyledText from '../../components/StyledText/StyledText';
 import QUOTES_LIST from '../../../assets/data/quotes.json';
@@ -10,7 +10,6 @@ import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation
 import fonts from '../../theme/fonts';
 import {useNavigation} from '@react-navigation/native';
 import {HomeScreenProp} from '../../navigation/types/HomeStackNavigatorParamList';
-import {API, graphqlOperation} from 'aws-amplify';
 import {useAuthContext} from '../../contexts/AuthContext';
 import {useQuery} from '@apollo/client';
 import {getUser} from './queries';
