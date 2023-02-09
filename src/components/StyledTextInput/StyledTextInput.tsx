@@ -9,16 +9,25 @@ const StyledTextInput = ({
   labelText,
   placeholder = '',
   multiline = false,
-  containerStyle,
+  containerStyle = {},
+  value,
+  onChangeText,
+  onBlur,
+  secureTextEntry = false,
+  labelStyle = {},
 }: IStyledTextInputInterface) => {
   return (
     <View>
-      <StyledText style={styles.label}>{labelText}</StyledText>
+      <StyledText style={[styles.label, labelStyle]}>{labelText}</StyledText>
       <TextInput
+        onBlur={onBlur}
+        value={value}
+        onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor={colors.grey}
         style={[styles.textInput, containerStyle, multiline && {height: 200}]}
         multiline={multiline}
+        secureTextEntry={secureTextEntry}
       />
     </View>
   );
