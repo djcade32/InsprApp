@@ -1,4 +1,4 @@
-import {View, Text, Image} from 'react-native';
+import {View, Image} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import StyledText from '../../../components/StyledText/StyledText';
@@ -6,8 +6,12 @@ import logo from '../../../../assets/images/inspr-logo.png';
 import StyledButton from '../../../components/StyledButton/StyledButton';
 import colors from '../../../theme/colors';
 import spacing from '../../../theme/spacing';
+import {useNavigation} from '@react-navigation/native';
+import {MainAuthScreenProp} from '../../../navigation/types/AuthStackNavigatorParamList';
+import fonts from '../../../theme/fonts';
 
 const MainAuthScreen = () => {
+  const navigation = useNavigation<MainAuthScreenProp>();
   return (
     <View style={styles.screen}>
       <View style={{alignItems: 'center'}}>
@@ -21,8 +25,13 @@ const MainAuthScreen = () => {
         <StyledButton
           text="Sign in"
           containerStyle={{marginBottom: spacing.md}}
+          onPress={() => navigation.navigate('SigninScreen')}
         />
-        <StyledButton text="Create account" color={colors.red} />
+        <StyledButton
+          text="Create account"
+          color={colors.red}
+          onPress={() => navigation.navigate('CreateAccountScreen')}
+        />
       </View>
     </View>
   );
