@@ -1,16 +1,17 @@
+import {Quote} from '../API';
+
 export interface IQuotesList {
-  data: IQuote[];
+  data: (Quote | null)[] | undefined;
   color?: string;
 }
 
 export interface IQuote {
   item: {
-    key: string;
-    author?: string;
-    text: string;
+    author?: string | undefined | null;
+    quote: string;
     category: string;
     favorite: boolean;
-  };
+  } | null;
   color?: string;
   screen?: string;
 }

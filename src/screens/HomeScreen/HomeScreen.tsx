@@ -1,16 +1,13 @@
 import {ActivityIndicator, FlatList, Pressable, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styles from './styles';
 import StyledText from '../../components/StyledText/StyledText';
-import QUOTES_LIST from '../../../assets/data/quotes.json';
-import FAVORITE_QUOTES_LIST from '../../../assets/data/favoriteQuotes.json';
 import QuotesList from '../../components/QuotesList/QuotesList';
 import colors from '../../theme/colors';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
 import fonts from '../../theme/fonts';
 import {useNavigation} from '@react-navigation/native';
 import {HomeScreenProp} from '../../navigation/types/HomeStackNavigatorParamList';
-import {API, graphqlOperation} from 'aws-amplify';
 import {useAuthContext} from '../../contexts/AuthContext';
 import {useQuery} from '@apollo/client';
 import {getUser} from './queries';
@@ -26,6 +23,7 @@ const HomeScreen = () => {
   );
 
   const categories = data?.getUser?.categories;
+  const quotes = data?.getUser?.Quotes?.items;
 
   if (loading) {
     return (
@@ -116,7 +114,7 @@ const HomeScreen = () => {
             View all
           </StyledText>
         </View>
-        <QuotesList data={QUOTES_LIST} />
+        <QuotesList data={quotes} />
       </View>
       {/* Favorite quotes list */}
       <View style={styles.categoriesContainer}>
@@ -130,7 +128,7 @@ const HomeScreen = () => {
             View all
           </StyledText>
         </View>
-        <QuotesList data={FAVORITE_QUOTES_LIST} color={colors.red} />
+        <QuotesList data={quotes} color={colors.red} />
       </View>
     </View>
   );
