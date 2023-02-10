@@ -28,9 +28,9 @@ const QuotesListItem = ({item, color = ''}: IQuote) => {
       ]}
       onPress={navigateToQuoteScreen}>
       <StyledText numberOfLines={3} style={styles.quoteText}>
-        {item.text}
+        {item?.quote}
       </StyledText>
-      <StyledText style={styles.quoteAuthor}>- {item.author}</StyledText>
+      <StyledText style={styles.quoteAuthor}>- {item?.author}</StyledText>
       <View
         style={{
           flexDirection: 'row',
@@ -39,12 +39,12 @@ const QuotesListItem = ({item, color = ''}: IQuote) => {
         }}>
         <View style={styles.categoryBadgeContainer}>
           <StyledText style={styles.categoryBadgeText}>
-            {item.category}
+            {item?.category}
           </StyledText>
         </View>
         <MaterialCommunityIcons
           size={35}
-          name={item.favorite ? 'bookmark' : 'bookmark-outline'}
+          name={item?.favorite ? 'bookmark' : 'bookmark-outline'}
           style={{color: colors.mintGreen}}
         />
       </View>
