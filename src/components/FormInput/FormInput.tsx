@@ -13,6 +13,7 @@ interface IFormInput<ContentType> {
   placeholder?: string;
   labelText: string;
   secureTextEntry?: boolean;
+  multiline?: boolean;
 }
 
 function FormInput<ContentType>({
@@ -22,6 +23,7 @@ function FormInput<ContentType>({
   placeholder = '',
   labelText,
   secureTextEntry = false,
+  multiline = false,
 }: IFormInput<ContentType>) {
   return (
     <Controller
@@ -31,6 +33,7 @@ function FormInput<ContentType>({
       render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
         <View style={{marginBottom: spacing.xsm}}>
           <StyledTextInput
+            multiline={multiline}
             value={value as string}
             onChangeText={onChange}
             onBlur={onBlur}

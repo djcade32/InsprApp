@@ -13,7 +13,6 @@ const QuotesList = ({data, color}: IQuotesList) => {
       style={styles.categoriesList}
       data={data}
       renderItem={({item}) => {
-        console.log('item: ', item);
         return <QuotesListItem item={item} color={color} />;
       }}
       horizontal

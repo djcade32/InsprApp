@@ -21,32 +21,31 @@ const region = config.aws_appsync_region;
 
 const httpLink = createHttpLink({uri: url});
 
-// const typePolicies: TypePolicies = {
-//   Query: {
-//     fields: {
-//       commentsByPost: {
-//         keyArgs: ['postID', 'createdAt', 'sortDirection', 'filter'],
-//         merge: (existing = {}, incoming) => {
-//           return {
-//             ...existing,
-//             ...incoming,
-//             items: [...(existing.items || []), ...incoming.items],
-//           };
-//         },
-//       },
-//       postsByDate: {
-//         keyArgs: ['createdAt', 'sortDirection', 'filter', 'type'],
-//         merge: (existing = {}, incoming) => {
-//           return {
-//             ...existing,
-//             ...incoming,
-//             items: [...(existing.items || []), ...incoming.items],
-//           };
-//         },
-//       },
-//     },
-//   },
-// };
+const typePolicies: TypePolicies = {
+  Query: {
+    fields: {
+      getUser: {
+        merge: (existing = {}, incoming) => {
+          return {
+            ...existing,
+            ...incoming,
+            items: [...(existing.items || []), ...incoming.items],
+          };
+        },
+      },
+      // postsByDate: {
+      //   keyArgs: ['createdAt', 'sortDirection', 'filter', 'type'],
+      //   merge: (existing = {}, incoming) => {
+      //     return {
+      //       ...existing,
+      //       ...incoming,
+      //       items: [...(existing.items || []), ...incoming.items],
+      //     };
+      //   },
+      // },
+    },
+  },
+};
 
 const Client = ({children}: IClient) => {
   const {user} = useAuthContext();

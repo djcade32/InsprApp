@@ -99,7 +99,7 @@ const HomeScreen = () => {
         ) : (
           <View style={styles.noCategoriesContainer}>
             <StyledText style={styles.categoryText}>
-              Tap to add a category
+              Tap to create a category
             </StyledText>
           </View>
         )}
