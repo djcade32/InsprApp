@@ -58,7 +58,6 @@ const CreateCategoryModal = ({
     }
     setModalVisible(!modalVisible);
     setNewCategory('');
-    console.log(newCategory);
   }
   function onCancel() {
     setModalVisible(!modalVisible);
