@@ -6,12 +6,7 @@ export interface IQuotesList {
 }
 
 export interface IQuote {
-  item: {
-    author?: string | undefined | null;
-    quote: string;
-    category: string;
-    favorite: boolean;
-  } | null;
+  item: Quote | null;
   color?: string;
   screen?: string;
 }

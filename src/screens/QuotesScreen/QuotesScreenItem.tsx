@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import StyledText from '../../components/StyledText/StyledText';
 import colors from '../../theme/colors';
 import styles from './styles';
-import {IQuote} from '../../interfaces/quotesList';
+import {IQuote} from '../../interfaces/quotesListInterface';
 import {useNavigation} from '@react-navigation/native';
 import {QuotesScreenItemProp} from '../../navigation/types/HomeStackNavigatorParamList';
 

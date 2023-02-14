@@ -24,6 +24,7 @@ const HomeScreen = () => {
 
   const categories = data?.getUser?.categories;
   const quotes = data?.getUser?.Quotes?.items;
+  const favoriteQuotes = quotes?.filter(quote => quote?.favorite);
 
   if (loading) {
     return (
@@ -128,7 +129,7 @@ const HomeScreen = () => {
             View all
           </StyledText>
         </View>
-        <QuotesList data={quotes} color={colors.red} />
+        <QuotesList data={favoriteQuotes} color={colors.red} />
       </View>
     </View>
   );
