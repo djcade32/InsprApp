@@ -1,11 +1,6 @@
 import {View, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './styles';
-import StyledText from '../../components/StyledText/StyledText';
-import colors from '../../theme/colors';
-import fonts from '../../theme/fonts';
-import DropDownPicker from 'react-native-dropdown-picker';
-import StyledTextInput from '../../components/StyledTextInput/StyledTextInput';
 import StyledButton from '../../components/StyledButton/StyledButton';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
 import {createQuote, getUser} from './queries';
