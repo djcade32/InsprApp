@@ -12,13 +12,13 @@ export const createAllQuotes = /* GraphQL */ `
       Quotes {
         items {
           id
+          createdAt
           quote
           author
           category
           userID
           allquotesID
           favorite
-          createdAt
           updatedAt
           _version
           _deleted
@@ -62,13 +62,13 @@ export const updateAllQuotes = /* GraphQL */ `
       Quotes {
         items {
           id
+          createdAt
           quote
           author
           category
           userID
           allquotesID
           favorite
-          createdAt
           updatedAt
           _version
           _deleted
@@ -112,13 +112,13 @@ export const deleteAllQuotes = /* GraphQL */ `
       Quotes {
         items {
           id
+          createdAt
           quote
           author
           category
           userID
           allquotesID
           favorite
-          createdAt
           updatedAt
           _version
           _deleted
@@ -159,6 +159,7 @@ export const createQuote = /* GraphQL */ `
   ) {
     createQuote(input: $input, condition: $condition) {
       id
+      createdAt
       quote
       author
       category
@@ -181,7 +182,6 @@ export const createQuote = /* GraphQL */ `
       }
       allquotesID
       favorite
-      createdAt
       updatedAt
       _version
       _deleted
@@ -196,6 +196,7 @@ export const updateQuote = /* GraphQL */ `
   ) {
     updateQuote(input: $input, condition: $condition) {
       id
+      createdAt
       quote
       author
       category
@@ -218,7 +219,6 @@ export const updateQuote = /* GraphQL */ `
       }
       allquotesID
       favorite
-      createdAt
       updatedAt
       _version
       _deleted
@@ -233,6 +233,7 @@ export const deleteQuote = /* GraphQL */ `
   ) {
     deleteQuote(input: $input, condition: $condition) {
       id
+      createdAt
       quote
       author
       category
@@ -255,7 +256,6 @@ export const deleteQuote = /* GraphQL */ `
       }
       allquotesID
       favorite
-      createdAt
       updatedAt
       _version
       _deleted
@@ -276,13 +276,13 @@ export const createUser = /* GraphQL */ `
       Quotes {
         items {
           id
+          createdAt
           quote
           author
           category
           userID
           allquotesID
           favorite
-          createdAt
           updatedAt
           _version
           _deleted
@@ -313,13 +313,13 @@ export const updateUser = /* GraphQL */ `
       Quotes {
         items {
           id
+          createdAt
           quote
           author
           category
           userID
           allquotesID
           favorite
-          createdAt
           updatedAt
           _version
           _deleted
@@ -350,13 +350,13 @@ export const deleteUser = /* GraphQL */ `
       Quotes {
         items {
           id
+          createdAt
           quote
           author
           category
           userID
           allquotesID
           favorite
-          createdAt
           updatedAt
           _version
           _deleted

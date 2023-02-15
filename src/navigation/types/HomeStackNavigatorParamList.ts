@@ -4,7 +4,9 @@ import {RouteProp} from '@react-navigation/native';
 export type HomeStackNavigatorParamList = {
   HomeScreen: undefined;
   CategoriesScreen: undefined;
-  QuoteScreen: undefined;
+  QuoteScreen: {
+    index: number;
+  };
   QuotesScreen: {
     title: string;
   };
@@ -26,4 +28,9 @@ export type QuotesScreenItemProp = NativeStackNavigationProp<
 export type QuotesScreenRouteProp = RouteProp<
   HomeStackNavigatorParamList,
   'QuotesScreen'
+>;
+
+export type QuoteScreenRouteProp = RouteProp<
+  HomeStackNavigatorParamList,
+  'QuoteScreen'
 >;

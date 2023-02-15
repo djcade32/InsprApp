@@ -1,4 +1,11 @@
-import {FlatList, Text, View, ViewabilityConfig, ViewToken} from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  View,
+  ViewabilityConfig,
+  ViewToken,
+} from 'react-native';
 import React, {useRef, useState} from 'react';
 import styles from './styles';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
@@ -8,14 +15,95 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import spacing from '../../theme/spacing';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../theme/colors';
-import QUOTES_LIST from '../../../assets/data/quotes.json';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import QuoteMenu from '../../components/QuoteMenu/QuoteMenu';
+import {useAuthContext} from '../../contexts/AuthContext';
+import {useMutation, useQuery} from '@apollo/client';
+import {
+  ModelSortDirection,
+  QuotesByUserIDAndCreatedAtQuery,
+  QuotesByUserIDAndCreatedAtQueryVariables,
+  UpdateQuoteInput,
+  UpdateQuoteMutation,
+  UpdateQuoteMutationVariables,
+} from '../../API';
+import {quotesByUserIDAndCreatedAt} from './queries';
+import ApiErrorMessage from '../../components/ApiErrorMessage';
+import {useRoute} from '@react-navigation/native';
+import {QuoteScreenRouteProp} from '../../navigation/types/HomeStackNavigatorParamList';
+import {updateQuote} from './queries';
+import {Quote} from '../../API';
 
 const QuoteScreen = () => {
-  const [activeQuoteIndex, setActiveQuoteIndex] = useState(0);
-  const [activeQuoteCategory, setActiveQuoteCategory] = useState('');
+  const route = useRoute<QuoteScreenRouteProp>();
+  const flatListRef = useRef<FlatList | null>(null);
+  const [activeQuoteIndex, setActiveQuoteIndex] = useState(route.params.index);
   const [activeQuoteFavorite, setActiveQuoteFavorite] = useState(false);
+  const [activeQuote, setActiveQuote] = useState<Quote | null>(null);
+  const {userId} = useAuthContext();
+
+  const {data, loading, error} = useQuery<
+    QuotesByUserIDAndCreatedAtQuery,
+    QuotesByUserIDAndCreatedAtQueryVariables
+  >(quotesByUserIDAndCreatedAt, {
+    variables: {
+      userID: userId,
+      sortDirection: ModelSortDirection.DESC,
+    },
+  });
+
+  const [runUpdateQuote, {loading: updateLoading}] = useMutation<
+    UpdateQuoteMutation,
+    UpdateQuoteMutationVariables
+  >(updateQuote);
+
+  async function onFavoritePress() {
+    if (!activeQuote || updateLoading) {
+      return;
+    }
+    const input: UpdateQuoteInput = {
+      id: activeQuote?.id,
+      favorite: !activeQuote?.favorite,
+      _version: activeQuote?._version,
+    };
+
+    try {
+      await runUpdateQuote({variables: {input}});
+      setActiveQuoteFavorite(prev => !prev);
+    } catch (error) {
+      Alert.alert('Oops', 'There was an error favoriting this quote.');
+      console.log(error);
+    }
+  }
+
+  const quotes = data?.quotesByUserIDAndCreatedAt?.items;
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'white',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <ActivityIndicator size={'large'} color={colors.grey} />
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'white',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <ApiErrorMessage message={error.message} />
+      </View>
+    );
+  }
 
   const viewabilityConfig: ViewabilityConfig = {
     itemVisiblePercentThreshold: 51,
@@ -23,11 +111,15 @@ const QuoteScreen = () => {
 
   const onViewableItemsChanged = useRef(
     ({viewableItems}: {viewableItems: Array<ViewToken>}) => {
+      if (loading) {
+        return;
+      }
       if (viewableItems.length > 0) {
         const {item, index} = viewableItems[0];
         setActiveQuoteIndex(index || 0);
-        setActiveQuoteCategory(item.item.category);
-        setActiveQuoteFavorite(item.item.favorite);
+        setActiveQuoteFavorite(item?.favorite);
+        setActiveQuote(item);
+        console.log('item: ', item);
       }
     },
   );
@@ -43,19 +135,18 @@ const QuoteScreen = () => {
         }}>
         <View style={styles.categoryAndMoreOptionsContainer}>
           <StyledText style={{fontSize: fonts.size.xlg}}>
-            {activeQuoteCategory}
+            {activeQuote?.category}
           </StyledText>
           <QuoteMenu />
         </View>
         <FlatList
+          ref={flatListRef}
           style={{flexGrow: 1}}
-          data={QUOTES_LIST}
+          data={quotes}
           renderItem={({item}) => (
             <View style={styles.quoteContainer}>
-              <StyledText style={styles.quoteText}>{item.item.text}</StyledText>
-              <StyledText style={styles.author}>
-                - {item.item.author}
-              </StyledText>
+              <StyledText style={styles.quoteText}>{item?.quote}</StyledText>
+              <StyledText style={styles.author}>- {item?.author}</StyledText>
             </View>
           )}
           horizontal
@@ -63,6 +154,25 @@ const QuoteScreen = () => {
           showsHorizontalScrollIndicator={false}
           viewabilityConfig={viewabilityConfig}
           onViewableItemsChanged={onViewableItemsChanged.current}
+          initialScrollIndex={route.params.index}
+          onScrollToIndexFailed={error => {
+            if (!flatListRef.current) {
+              console.log('No flatlist ref');
+              return;
+            }
+            flatListRef.current.scrollToOffset({
+              offset: error.averageItemLength * error.index,
+              animated: false,
+            });
+            setTimeout(() => {
+              if (quotes?.length !== 0 && flatListRef.current !== null) {
+                flatListRef.current.scrollToIndex({
+                  index: error.index,
+                  animated: true,
+                });
+              }
+            }, 100);
+          }}
         />
 
         <View style={styles.footer}>
@@ -71,6 +181,8 @@ const QuoteScreen = () => {
               size={45}
               name={activeQuoteFavorite ? 'bookmark' : 'bookmark-outline'}
               color={colors.mintGreen}
+              onPress={onFavoritePress}
+              suppressHighlighting
             />
             <MaterialIcons size={45} name="ios-share" />
           </View>
@@ -80,7 +192,7 @@ const QuoteScreen = () => {
               alignItems: 'center',
             }}>
             <AnimatedDotsCarousel
-              length={QUOTES_LIST.length}
+              length={quotes?.length || 0}
               currentIndex={activeQuoteIndex}
               maxIndicators={1}
               interpolateOpacityAndColor={true}

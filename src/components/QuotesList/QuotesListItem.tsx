@@ -17,7 +17,7 @@ import {
 import {useMutation} from '@apollo/client';
 import {updateQuote} from './queries';
 
-const QuotesListItem = ({item, color = ''}: IQuote) => {
+const QuotesListItem = ({item, color = '', index}: IQuote) => {
   const navigation = useNavigation<QuotesScreenItemProp>();
   const [isFavorite, setIsFavorite] = useState(item?.favorite);
   // True if color prop is being used and false if it is not
@@ -29,7 +29,7 @@ const QuotesListItem = ({item, color = ''}: IQuote) => {
   >(updateQuote);
 
   function navigateToQuoteScreen() {
-    navigation.navigate('QuoteScreen');
+    navigation.navigate('QuoteScreen', {index});
   }
   async function onFavoritePress() {
     if (!item || updateLoading) {

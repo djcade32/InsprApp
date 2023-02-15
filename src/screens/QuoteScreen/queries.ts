@@ -1,40 +1,5 @@
 import {gql} from '@apollo/client';
 
-export const getUser = gql`
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
-      firstName
-      lastName
-      email
-      Quotes {
-        items {
-          id
-          quote
-          author
-          category
-          userID
-          allquotesID
-          favorite
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      categories
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-
 export const quotesByUserIDAndCreatedAt = gql`
   query QuotesByUserIDAndCreatedAt(
     $userID: ID!
@@ -67,6 +32,21 @@ export const quotesByUserIDAndCreatedAt = gql`
       }
       nextToken
       startedAt
+    }
+  }
+`;
+
+export const updateQuote = gql`
+  mutation UpdateQuote(
+    $input: UpdateQuoteInput!
+    $condition: ModelQuoteConditionInput
+  ) {
+    updateQuote(input: $input, condition: $condition) {
+      id
+      favorite
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

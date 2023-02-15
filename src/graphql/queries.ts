@@ -9,13 +9,13 @@ export const getAllQuotes = /* GraphQL */ `
       Quotes {
         items {
           id
+          createdAt
           quote
           author
           category
           userID
           allquotesID
           favorite
-          createdAt
           updatedAt
           _version
           _deleted
@@ -133,6 +133,7 @@ export const getQuote = /* GraphQL */ `
   query GetQuote($id: ID!) {
     getQuote(id: $id) {
       id
+      createdAt
       quote
       author
       category
@@ -155,7 +156,6 @@ export const getQuote = /* GraphQL */ `
       }
       allquotesID
       favorite
-      createdAt
       updatedAt
       _version
       _deleted
@@ -172,6 +172,7 @@ export const listQuotes = /* GraphQL */ `
     listQuotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        createdAt
         quote
         author
         category
@@ -190,7 +191,6 @@ export const listQuotes = /* GraphQL */ `
         }
         allquotesID
         favorite
-        createdAt
         updatedAt
         _version
         _deleted
@@ -216,6 +216,7 @@ export const syncQuotes = /* GraphQL */ `
     ) {
       items {
         id
+        createdAt
         quote
         author
         category
@@ -234,7 +235,6 @@ export const syncQuotes = /* GraphQL */ `
         }
         allquotesID
         favorite
-        createdAt
         updatedAt
         _version
         _deleted
@@ -245,16 +245,18 @@ export const syncQuotes = /* GraphQL */ `
     }
   }
 `;
-export const quotesByUserID = /* GraphQL */ `
-  query QuotesByUserID(
+export const quotesByUserIDAndCreatedAt = /* GraphQL */ `
+  query QuotesByUserIDAndCreatedAt(
     $userID: ID!
+    $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelQuoteFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    quotesByUserID(
+    quotesByUserIDAndCreatedAt(
       userID: $userID
+      createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -262,6 +264,7 @@ export const quotesByUserID = /* GraphQL */ `
     ) {
       items {
         id
+        createdAt
         quote
         author
         category
@@ -280,7 +283,6 @@ export const quotesByUserID = /* GraphQL */ `
         }
         allquotesID
         favorite
-        createdAt
         updatedAt
         _version
         _deleted
@@ -308,6 +310,7 @@ export const quotesByAllquotesID = /* GraphQL */ `
     ) {
       items {
         id
+        createdAt
         quote
         author
         category
@@ -326,7 +329,6 @@ export const quotesByAllquotesID = /* GraphQL */ `
         }
         allquotesID
         favorite
-        createdAt
         updatedAt
         _version
         _deleted
@@ -347,13 +349,13 @@ export const getUser = /* GraphQL */ `
       Quotes {
         items {
           id
+          createdAt
           quote
           author
           category
           userID
           allquotesID
           favorite
-          createdAt
           updatedAt
           _version
           _deleted

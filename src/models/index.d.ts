@@ -41,9 +41,10 @@ export declare const AllQuotes: (new (init: ModelInit<AllQuotes>) => AllQuotes) 
 type EagerQuote = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Quote, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
+    readOnlyFields: 'updatedAt';
   };
   readonly id: string;
+  readonly createdAt: string;
   readonly quote: string;
   readonly author?: string | null;
   readonly category: string;
@@ -51,16 +52,16 @@ type EagerQuote = {
   readonly User?: User | null;
   readonly allquotesID: string;
   readonly favorite: boolean;
-  readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
 type LazyQuote = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Quote, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
+    readOnlyFields: 'updatedAt';
   };
   readonly id: string;
+  readonly createdAt: string;
   readonly quote: string;
   readonly author?: string | null;
   readonly category: string;
@@ -68,7 +69,6 @@ type LazyQuote = {
   readonly User: AsyncItem<User | undefined>;
   readonly allquotesID: string;
   readonly favorite: boolean;
-  readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 

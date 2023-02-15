@@ -103,6 +103,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "quote": {
                     "name": "quote",
                     "isArray": false,
@@ -160,14 +167,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
                 "updatedAt": {
                     "name": "updatedAt",
                     "isArray": false,
@@ -189,7 +188,8 @@ export const schema = {
                     "properties": {
                         "name": "byUser",
                         "fields": [
-                            "userID"
+                            "userID",
+                            "createdAt"
                         ]
                     }
                 },
@@ -321,5 +321,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "ded7b7cd702aaeedfa98a45cd14c4a3e"
+    "version": "19066c4fea3009e71717ba82eb616902"
 };
