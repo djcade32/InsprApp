@@ -31,7 +31,7 @@ const CategoriesScreen = () => {
   const createButton = (
     <StyledText
       style={styles.createButton}
-      onPress={() => setModalVisible(!modalVisible)}>
+      onPress={() => setModalVisible(true)}>
       Create
     </StyledText>
   );

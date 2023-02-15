@@ -12,8 +12,8 @@ const QuotesList = ({data, color}: IQuotesList) => {
     <FlatList
       style={styles.categoriesList}
       data={data}
-      renderItem={({item}) => {
-        return <QuotesListItem item={item} color={color} />;
+      renderItem={({item, index}) => {
+        return <QuotesListItem item={item} color={color} index={index} />;
       }}
       horizontal
       showsHorizontalScrollIndicator={false}

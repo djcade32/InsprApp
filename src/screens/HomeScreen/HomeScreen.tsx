@@ -10,8 +10,14 @@ import {useNavigation} from '@react-navigation/native';
 import {HomeScreenProp} from '../../navigation/types/HomeStackNavigatorParamList';
 import {useAuthContext} from '../../contexts/AuthContext';
 import {useQuery} from '@apollo/client';
-import {getUser} from './queries';
-import {GetUserQuery, GetUserQueryVariables} from '../../API';
+import {getUser, quotesByUserIDAndCreatedAt} from './queries';
+import {
+  GetUserQuery,
+  GetUserQueryVariables,
+  ModelSortDirection,
+  QuotesByUserIDAndCreatedAtQuery,
+  QuotesByUserIDAndCreatedAtQueryVariables,
+} from '../../API';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
 
 const HomeScreen = () => {
@@ -22,11 +28,28 @@ const HomeScreen = () => {
     {variables: {id: userId}},
   );
 
-  const categories = data?.getUser?.categories;
-  const quotes = data?.getUser?.Quotes?.items;
-  const favoriteQuotes = quotes?.filter(quote => quote?.favorite);
+  const {
+    data: quotesByUserdata,
+    loading: quotesByUserloading,
+    error: quotesByUsererror,
+  } = useQuery<
+    QuotesByUserIDAndCreatedAtQuery,
+    QuotesByUserIDAndCreatedAtQueryVariables
+  >(quotesByUserIDAndCreatedAt, {
+    variables: {
+      userID: userId,
+      sortDirection: ModelSortDirection.DESC,
+    },
+  });
 
-  if (loading) {
+  const categories = data?.getUser?.categories;
+  const quotes = quotesByUserdata?.quotesByUserIDAndCreatedAt?.items;
+  const favoriteQuotes =
+    quotesByUserdata?.quotesByUserIDAndCreatedAt?.items.filter(
+      quote => quote?.favorite,
+    );
+
+  if (loading || quotesByUserloading) {
     return (
       <View
         style={{
@@ -39,7 +62,7 @@ const HomeScreen = () => {
       </View>
     );
   }
-  if (error) {
+  if (error || quotesByUsererror) {
     return (
       <View
         style={{
@@ -48,7 +71,9 @@ const HomeScreen = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <ApiErrorMessage message={error.message} />
+        <ApiErrorMessage
+          message={error?.message || quotesByUsererror?.message}
+        />
       </View>
     );
   }
