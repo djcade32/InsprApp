@@ -78,6 +78,7 @@ export type ModelQuoteConnection = {
 export type Quote = {
   __typename: "Quote",
   id: string,
+  createdAt: string,
   quote: string,
   author?: string | null,
   category: string,
@@ -85,7 +86,6 @@ export type Quote = {
   User?: User | null,
   allquotesID: string,
   favorite: boolean,
-  createdAt: string,
   updatedAt: string,
   _version: number,
   _deleted?: boolean | null,
@@ -120,6 +120,7 @@ export type DeleteAllQuotesInput = {
 
 export type CreateQuoteInput = {
   id?: string | null,
+  createdAt?: string | null,
   quote: string,
   author?: string | null,
   category: string,
@@ -130,6 +131,7 @@ export type CreateQuoteInput = {
 };
 
 export type ModelQuoteConditionInput = {
+  createdAt?: ModelStringInput | null,
   quote?: ModelStringInput | null,
   author?: ModelStringInput | null,
   category?: ModelStringInput | null,
@@ -166,6 +168,7 @@ export type ModelBooleanInput = {
 
 export type UpdateQuoteInput = {
   id: string,
+  createdAt?: string | null,
   quote?: string | null,
   author?: string | null,
   category?: string | null,
@@ -230,6 +233,7 @@ export type ModelAllQuotesConnection = {
 
 export type ModelQuoteFilterInput = {
   id?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
   quote?: ModelStringInput | null,
   author?: ModelStringInput | null,
   category?: ModelStringInput | null,
@@ -239,6 +243,16 @@ export type ModelQuoteFilterInput = {
   and?: Array< ModelQuoteFilterInput | null > | null,
   or?: Array< ModelQuoteFilterInput | null > | null,
   not?: ModelQuoteFilterInput | null,
+};
+
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
 };
 
 export enum ModelSortDirection {
@@ -288,6 +302,7 @@ export type ModelSubscriptionIDInput = {
 
 export type ModelSubscriptionQuoteFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
   quote?: ModelSubscriptionStringInput | null,
   author?: ModelSubscriptionStringInput | null,
   category?: ModelSubscriptionStringInput | null,
@@ -342,13 +357,13 @@ export type CreateAllQuotesMutation = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -398,13 +413,13 @@ export type UpdateAllQuotesMutation = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -454,13 +469,13 @@ export type DeleteAllQuotesMutation = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -505,6 +520,7 @@ export type CreateQuoteMutation = {
   createQuote?:  {
     __typename: "Quote",
     id: string,
+    createdAt: string,
     quote: string,
     author?: string | null,
     category: string,
@@ -529,7 +545,6 @@ export type CreateQuoteMutation = {
     } | null,
     allquotesID: string,
     favorite: boolean,
-    createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
@@ -546,6 +561,7 @@ export type UpdateQuoteMutation = {
   updateQuote?:  {
     __typename: "Quote",
     id: string,
+    createdAt: string,
     quote: string,
     author?: string | null,
     category: string,
@@ -570,7 +586,6 @@ export type UpdateQuoteMutation = {
     } | null,
     allquotesID: string,
     favorite: boolean,
-    createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
@@ -587,6 +602,7 @@ export type DeleteQuoteMutation = {
   deleteQuote?:  {
     __typename: "Quote",
     id: string,
+    createdAt: string,
     quote: string,
     author?: string | null,
     category: string,
@@ -611,7 +627,6 @@ export type DeleteQuoteMutation = {
     } | null,
     allquotesID: string,
     favorite: boolean,
-    createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
@@ -636,13 +651,13 @@ export type CreateUserMutation = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -677,13 +692,13 @@ export type UpdateUserMutation = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -718,13 +733,13 @@ export type DeleteUserMutation = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -755,13 +770,13 @@ export type GetAllQuotesQuery = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -890,6 +905,7 @@ export type GetQuoteQuery = {
   getQuote?:  {
     __typename: "Quote",
     id: string,
+    createdAt: string,
     quote: string,
     author?: string | null,
     category: string,
@@ -914,7 +930,6 @@ export type GetQuoteQuery = {
     } | null,
     allquotesID: string,
     favorite: boolean,
-    createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
@@ -934,6 +949,7 @@ export type ListQuotesQuery = {
     items:  Array< {
       __typename: "Quote",
       id: string,
+      createdAt: string,
       quote: string,
       author?: string | null,
       category: string,
@@ -953,7 +969,6 @@ export type ListQuotesQuery = {
       } | null,
       allquotesID: string,
       favorite: boolean,
-      createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
@@ -977,6 +992,7 @@ export type SyncQuotesQuery = {
     items:  Array< {
       __typename: "Quote",
       id: string,
+      createdAt: string,
       quote: string,
       author?: string | null,
       category: string,
@@ -996,7 +1012,6 @@ export type SyncQuotesQuery = {
       } | null,
       allquotesID: string,
       favorite: boolean,
-      createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
@@ -1007,20 +1022,22 @@ export type SyncQuotesQuery = {
   } | null,
 };
 
-export type QuotesByUserIDQueryVariables = {
+export type QuotesByUserIDAndCreatedAtQueryVariables = {
   userID: string,
+  createdAt?: ModelStringKeyConditionInput | null,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelQuoteFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type QuotesByUserIDQuery = {
-  quotesByUserID?:  {
+export type QuotesByUserIDAndCreatedAtQuery = {
+  quotesByUserIDAndCreatedAt?:  {
     __typename: "ModelQuoteConnection",
     items:  Array< {
       __typename: "Quote",
       id: string,
+      createdAt: string,
       quote: string,
       author?: string | null,
       category: string,
@@ -1040,7 +1057,6 @@ export type QuotesByUserIDQuery = {
       } | null,
       allquotesID: string,
       favorite: boolean,
-      createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
@@ -1065,6 +1081,7 @@ export type QuotesByAllquotesIDQuery = {
     items:  Array< {
       __typename: "Quote",
       id: string,
+      createdAt: string,
       quote: string,
       author?: string | null,
       category: string,
@@ -1084,7 +1101,6 @@ export type QuotesByAllquotesIDQuery = {
       } | null,
       allquotesID: string,
       favorite: boolean,
-      createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
@@ -1111,13 +1127,13 @@ export type GetUserQuery = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -1213,13 +1229,13 @@ export type OnCreateAllQuotesSubscription = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -1268,13 +1284,13 @@ export type OnUpdateAllQuotesSubscription = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -1323,13 +1339,13 @@ export type OnDeleteAllQuotesSubscription = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -1373,6 +1389,7 @@ export type OnCreateQuoteSubscription = {
   onCreateQuote?:  {
     __typename: "Quote",
     id: string,
+    createdAt: string,
     quote: string,
     author?: string | null,
     category: string,
@@ -1397,7 +1414,6 @@ export type OnCreateQuoteSubscription = {
     } | null,
     allquotesID: string,
     favorite: boolean,
-    createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
@@ -1413,6 +1429,7 @@ export type OnUpdateQuoteSubscription = {
   onUpdateQuote?:  {
     __typename: "Quote",
     id: string,
+    createdAt: string,
     quote: string,
     author?: string | null,
     category: string,
@@ -1437,7 +1454,6 @@ export type OnUpdateQuoteSubscription = {
     } | null,
     allquotesID: string,
     favorite: boolean,
-    createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
@@ -1453,6 +1469,7 @@ export type OnDeleteQuoteSubscription = {
   onDeleteQuote?:  {
     __typename: "Quote",
     id: string,
+    createdAt: string,
     quote: string,
     author?: string | null,
     category: string,
@@ -1477,7 +1494,6 @@ export type OnDeleteQuoteSubscription = {
     } | null,
     allquotesID: string,
     favorite: boolean,
-    createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
@@ -1501,13 +1517,13 @@ export type OnCreateUserSubscription = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -1541,13 +1557,13 @@ export type OnUpdateUserSubscription = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
@@ -1581,13 +1597,13 @@ export type OnDeleteUserSubscription = {
       items:  Array< {
         __typename: "Quote",
         id: string,
+        createdAt: string,
         quote: string,
         author?: string | null,
         category: string,
         userID: string,
         allquotesID: string,
         favorite: boolean,
-        createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,

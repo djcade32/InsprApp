@@ -6,10 +6,11 @@ type AllQuotes @model @auth(rules: [{allow: public}]) {
 
 type Quote @model @auth(rules: [{allow: public}]) {
   id: ID!
+  createdAt: AWSDateTime!
   quote: String!
   author: String
   category: String!
-  userID: ID! @index(name: "byUser")
+  userID: ID! @index(name: "byUser", sortKeyFields: ["createdAt"])
   User: User @belongsTo(fields: ["userID"])
   allquotesID: ID! @index(name: "byAllQuotes")
   favorite: Boolean!
@@ -23,4 +24,3 @@ type User @model @auth(rules: [{allow: public}]) {
   Quotes: [Quote] @hasMany(indexName: "byUser", fields: ["id"])
   categories: [String!]
 }
- 

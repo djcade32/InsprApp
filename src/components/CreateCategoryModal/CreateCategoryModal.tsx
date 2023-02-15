@@ -73,9 +73,7 @@ const CreateCategoryModal = ({
         Alert.alert('Modal has been closed.');
         setModalVisible(!modalVisible);
       }}>
-      <Pressable
-        style={styles.centeredView}
-        onPress={() => setModalVisible(!modalVisible)}>
+      <Pressable style={styles.centeredView}>
         <View style={styles.modalView}>
           <StyledText style={styles.modalText}>New category</StyledText>
           <TextInput

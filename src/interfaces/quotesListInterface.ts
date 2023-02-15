@@ -9,4 +9,5 @@ export interface IQuote {
   item: Quote | null;
   color?: string;
   screen?: string;
+  index: number;
 }
