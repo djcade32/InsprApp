@@ -76,7 +76,9 @@ const QuoteScreen = () => {
     }
   }
 
-  const quotes = data?.quotesByUserIDAndCreatedAt?.items;
+  const quotes =
+    data?.quotesByUserIDAndCreatedAt?.items.filter(quote => !quote?._deleted) ||
+    [];
 
   if (loading) {
     return (
@@ -119,7 +121,6 @@ const QuoteScreen = () => {
         setActiveQuoteIndex(index || 0);
         setActiveQuoteFavorite(item?.favorite);
         setActiveQuote(item);
-        console.log('item: ', item);
       }
     },
   );
@@ -137,7 +138,7 @@ const QuoteScreen = () => {
           <StyledText style={{fontSize: fonts.size.xlg}}>
             {activeQuote?.category}
           </StyledText>
-          <QuoteMenu />
+          <QuoteMenu activeQuote={quotes[activeQuoteIndex]} />
         </View>
         <FlatList
           ref={flatListRef}
