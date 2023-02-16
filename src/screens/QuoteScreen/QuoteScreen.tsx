@@ -157,7 +157,6 @@ const QuoteScreen = () => {
           initialScrollIndex={route.params.index}
           onScrollToIndexFailed={error => {
             if (!flatListRef.current) {
-              console.log('No flatlist ref');
               return;
             }
             flatListRef.current.scrollToOffset({
