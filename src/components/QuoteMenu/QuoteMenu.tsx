@@ -18,8 +18,11 @@ import {
   Quote,
 } from '../../API';
 import {deleteQuote} from './queries';
+import {useNavigation} from '@react-navigation/native';
+import {EditQuoteScreenItemProp} from '../../navigation/types/HomeStackNavigatorParamList';
 
 const QuoteMenu = ({activeQuote}: {activeQuote: Quote | null}) => {
+  const navigation = useNavigation<EditQuoteScreenItemProp>();
   const [runDeletePost] = useMutation<
     DeleteQuoteMutation,
     DeleteQuoteMutationVariables
@@ -44,6 +47,10 @@ const QuoteMenu = ({activeQuote}: {activeQuote: Quote | null}) => {
     }
   }
 
+  function navigateToEditQuoteScreen() {
+    navigation.navigate('EditQuoteScreen', {quote: activeQuote});
+  }
+
   return (
     <Menu
       renderer={renderers.Popover}
@@ -54,7 +61,7 @@ const QuoteMenu = ({activeQuote}: {activeQuote: Quote | null}) => {
         <MaterialIcons suppressHighlighting name="more-horiz" size={45} />
       </MenuTrigger>
       <MenuOptions>
-        <MenuOption onSelect={() => Alert.alert('Editing')}>
+        <MenuOption onSelect={navigateToEditQuoteScreen}>
           <StyledText style={styles.optionText}>Edit</StyledText>
         </MenuOption>
         <MenuOption onSelect={confirmDeletePost}>

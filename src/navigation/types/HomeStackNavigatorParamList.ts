@@ -1,5 +1,6 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
+import {Quote} from '../../API';
 
 export type HomeStackNavigatorParamList = {
   HomeScreen: undefined;
@@ -9,6 +10,9 @@ export type HomeStackNavigatorParamList = {
   };
   QuotesScreen: {
     title: string;
+  };
+  EditQuoteScreen: {
+    quote: Quote | null;
   };
 };
 
@@ -22,15 +26,22 @@ export type CategoriesScreenProp = NativeStackNavigationProp<
 >;
 export type QuotesScreenItemProp = NativeStackNavigationProp<
   HomeStackNavigatorParamList,
-  'QuoteScreen'
+  'QuotesScreen'
+>;
+export type EditQuoteScreenItemProp = NativeStackNavigationProp<
+  HomeStackNavigatorParamList,
+  'EditQuoteScreen'
 >;
 
 export type QuotesScreenRouteProp = RouteProp<
   HomeStackNavigatorParamList,
   'QuotesScreen'
 >;
-
 export type QuoteScreenRouteProp = RouteProp<
   HomeStackNavigatorParamList,
   'QuoteScreen'
+>;
+export type EditQuoteScreenRouteProp = RouteProp<
+  HomeStackNavigatorParamList,
+  'EditQuoteScreen'
 >;
