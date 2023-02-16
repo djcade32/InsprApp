@@ -20,7 +20,6 @@ import {
 import {deleteQuote} from './queries';
 
 const QuoteMenu = ({activeQuote}: {activeQuote: Quote | null}) => {
-  console.log(activeQuote);
   const [runDeletePost] = useMutation<
     DeleteQuoteMutation,
     DeleteQuoteMutationVariables
