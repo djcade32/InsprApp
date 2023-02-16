@@ -10,6 +10,8 @@ import {
 import {CognitoUser} from 'amazon-cognito-identity-js';
 import {Auth, Hub} from 'aws-amplify';
 import {HubCallback} from '@aws-amplify/core';
+import {ActivityIndicator} from 'react-native';
+import colors from '../theme/colors';
 
 type UserType = CognitoUser | null | undefined;
 type AuthContextType = {
@@ -24,6 +26,7 @@ const AuthContext = createContext<AuthContextType>({
 
 const AuthContextProvider = ({children}: {children: ReactNode}) => {
   const [user, setUser] = useState<UserType>(undefined);
+  const [checkingUser, setCheckingUser] = useState(true);
   const checkUser = async () => {
     try {
       const authUser = await Auth.currentAuthenticatedUser({
@@ -32,10 +35,13 @@ const AuthContextProvider = ({children}: {children: ReactNode}) => {
       setUser(authUser);
     } catch (e) {
       setUser(null);
+    } finally {
+      setCheckingUser(false);
     }
   };
 
   useEffect(() => {
+    console.log('Checking if user');
     checkUser();
   }, []);
   useEffect(() => {
@@ -45,6 +51,7 @@ const AuthContextProvider = ({children}: {children: ReactNode}) => {
         setUser(null);
       }
       if (event === 'signIn') {
+        console.log('Signing in');
         checkUser();
       }
     };
@@ -53,6 +60,11 @@ const AuthContextProvider = ({children}: {children: ReactNode}) => {
       listenerToken();
     };
   }, []);
+
+  if (checkingUser) {
+    return <ActivityIndicator size={'large'} color={colors.grey} />;
+  }
+
   return (
     <AuthContext.Provider value={{user, userId: user?.attributes?.sub}}>
       {children}
