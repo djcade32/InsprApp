@@ -43,11 +43,11 @@ const HomeScreen = () => {
   });
 
   const categories = data?.getUser?.categories;
-  const quotes = quotesByUserdata?.quotesByUserIDAndCreatedAt?.items;
-  const favoriteQuotes =
+  const quotes =
     quotesByUserdata?.quotesByUserIDAndCreatedAt?.items.filter(
-      quote => quote?.favorite,
-    );
+      quote => !quote?._deleted,
+    ) || [];
+  const favoriteQuotes = quotes?.filter(quote => quote?.favorite) || [];
 
   if (loading || quotesByUserloading) {
     return (
