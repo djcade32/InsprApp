@@ -131,7 +131,6 @@ const QuoteScreen = () => {
       <View
         style={{
           flex: 1,
-          paddingHorizontal: spacing.xxlg,
           justifyContent: 'space-between',
         }}>
         <View style={styles.categoryAndMoreOptionsContainer}>
@@ -158,7 +157,6 @@ const QuoteScreen = () => {
           initialScrollIndex={route.params.index}
           onScrollToIndexFailed={error => {
             if (!flatListRef.current) {
-              console.log('No flatlist ref');
               return;
             }
             flatListRef.current.scrollToOffset({
@@ -169,7 +167,7 @@ const QuoteScreen = () => {
               if (quotes?.length !== 0 && flatListRef.current !== null) {
                 flatListRef.current.scrollToIndex({
                   index: error.index,
-                  animated: true,
+                  animated: false,
                 });
               }
             }, 100);
