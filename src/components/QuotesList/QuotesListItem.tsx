@@ -58,9 +58,16 @@ const QuotesListItem = ({item, color = '', index}: IQuote) => {
           : {backgroundColor: colors.darkGreen},
       ]}
       onPress={navigateToQuoteScreen}>
-      <StyledText numberOfLines={3} style={styles.quoteText}>
-        {item?.quote}
-      </StyledText>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+        }}>
+        <StyledText numberOfLines={3} style={styles.quoteText}>
+          {item?.quote}
+        </StyledText>
+      </View>
+
       <StyledText style={styles.quoteAuthor}>- {item?.author}</StyledText>
       <View
         style={{
