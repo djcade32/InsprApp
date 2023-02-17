@@ -1,11 +1,9 @@
 import {View, FlatList, ActivityIndicator} from 'react-native';
 import React from 'react';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
-import QUOTES_LIST from '../../../assets/data/quotes.json';
 import spacing from '../../theme/spacing';
 import colors from '../../theme/colors';
 import QuotesScreenItem from './QuotesScreenItem';
-import {IQuotesScreen} from '../../interfaces/quotesScreenInterface';
 import {useRoute} from '@react-navigation/native';
 import {QuotesScreenRouteProp} from '../../navigation/types/HomeStackNavigatorParamList';
 import {useQuery} from '@apollo/client';
@@ -17,6 +15,7 @@ import {
 import {quotesByUserIDAndCreatedAt} from './queries';
 import {useAuthContext} from '../../contexts/AuthContext';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
+import NoQuotesMessage from '../../components/NoQuotesMessage';
 
 const QuotesScreen = () => {
   const route = useRoute<QuotesScreenRouteProp>();
@@ -34,8 +33,14 @@ const QuotesScreen = () => {
   });
 
   const quotes =
-    data?.quotesByUserIDAndCreatedAt?.items.filter(quote => !quote?._deleted) ||
-    [];
+    data?.quotesByUserIDAndCreatedAt?.items.filter(quote => {
+      if (!quote?._deleted) {
+        if (title !== 'Favorite' && title !== 'Your quotes') {
+          return quote?.category === title;
+        }
+        return quote;
+      }
+    }) || [];
   const favoriteQuotes = quotes?.filter(quote => quote?.favorite) || [];
 
   if (loading) {
@@ -65,21 +70,25 @@ const QuotesScreen = () => {
     );
   }
   return (
-    <View style={{backgroundColor: 'white'}}>
+    <View style={{backgroundColor: 'white', flex: 1}}>
       <HeaderNavigation title={title} />
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        style={{marginHorizontal: spacing.xsm, height: '100%'}}
-        data={title === 'Favorite' ? favoriteQuotes : quotes}
-        renderItem={({item, index}) => (
-          <QuotesScreenItem
-            index={index}
-            item={item}
-            color={title == 'Favorite' ? colors.red : ''}
-            screen={title}
-          />
-        )}
-      />
+      {quotes.length > 0 ? (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          style={{marginHorizontal: spacing.xsm, height: '100%'}}
+          data={title === 'Favorite' ? favoriteQuotes : quotes}
+          renderItem={({item, index}) => (
+            <QuotesScreenItem
+              index={index}
+              item={item}
+              color={title == 'Favorite' ? colors.red : ''}
+              screen={title}
+            />
+          )}
+        />
+      ) : (
+        <NoQuotesMessage />
+      )}
     </View>
   );
 };
