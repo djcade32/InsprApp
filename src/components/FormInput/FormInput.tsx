@@ -14,6 +14,7 @@ interface IFormInput<ContentType> {
   labelText: string;
   secureTextEntry?: boolean;
   multiline?: boolean;
+  editable?: boolean;
 }
 
 function FormInput<ContentType>({
@@ -24,6 +25,7 @@ function FormInput<ContentType>({
   labelText,
   secureTextEntry = false,
   multiline = false,
+  editable = true,
 }: IFormInput<ContentType>) {
   return (
     <Controller
@@ -33,15 +35,22 @@ function FormInput<ContentType>({
       render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
         <View style={{marginBottom: spacing.xsm}}>
           <StyledTextInput
+            editable={editable}
             multiline={multiline}
             value={value as string}
             onChangeText={onChange}
             onBlur={onBlur}
             labelText={labelText}
             placeholder={placeholder}
-            containerStyle={{
-              borderColor: error ? colors.red : colors.black,
-            }}
+            containerStyle={
+              !editable
+                ? {
+                    color: colors.grey,
+                  }
+                : {
+                    borderColor: error ? colors.red : colors.black,
+                  }
+            }
             secureTextEntry={secureTextEntry}
             labelStyle={error && {color: colors.red}}
           />

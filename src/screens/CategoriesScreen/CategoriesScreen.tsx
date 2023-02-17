@@ -1,10 +1,4 @@
-import {
-  View,
-  FlatList,
-  Pressable,
-  TouchableWithoutFeedback,
-  ActivityIndicator,
-} from 'react-native';
+import {View, FlatList, Pressable, ActivityIndicator} from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
@@ -19,17 +13,6 @@ import {useQuery} from '@apollo/client';
 import {GetUserQuery, GetUserQueryVariables} from '../../API';
 import colors from '../../theme/colors';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
-
-const CATEGORIES_LIST = [
-  'Art',
-  'Beauty',
-  'Business',
-  'Design',
-  'Failure',
-  'Finance',
-  'Health',
-  'Motivation',
-];
 
 const CategoriesScreen = () => {
   const navigation = useNavigation<CategoriesScreenProp>();
