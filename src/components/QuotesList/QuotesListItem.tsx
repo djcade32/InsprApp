@@ -64,7 +64,7 @@ const QuotesListItem = ({item, color = '', index}: IQuote) => {
           justifyContent: 'center',
         }}>
         <StyledText numberOfLines={3} style={styles.quoteText}>
-          {item?.quote}
+          "{item?.quote}"
         </StyledText>
       </View>
 

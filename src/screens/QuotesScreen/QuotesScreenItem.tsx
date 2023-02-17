@@ -33,7 +33,7 @@ const QuotesScreenItem = ({item, color = '', screen = '', index}: IQuote) => {
           justifyContent: 'center',
         }}>
         <StyledText numberOfLines={3} style={styles.quoteText}>
-          {item?.quote}
+          "{item?.quote}"
         </StyledText>
       </View>
       <View
@@ -57,7 +57,7 @@ const QuotesScreenItem = ({item, color = '', screen = '', index}: IQuote) => {
         </View>
         <MaterialCommunityIcons
           size={35}
-          name={'bookmark'}
+          name={item?.favorite ? 'bookmark' : 'bookmark-outline'}
           style={{color: colors.mintGreen}}
         />
       </View>

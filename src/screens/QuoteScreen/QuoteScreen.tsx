@@ -145,7 +145,7 @@ const QuoteScreen = () => {
           data={quotes}
           renderItem={({item}) => (
             <View style={styles.quoteContainer}>
-              <StyledText style={styles.quoteText}>{item?.quote}</StyledText>
+              <StyledText style={styles.quoteText}>"{item?.quote}"</StyledText>
               <StyledText style={styles.author}>- {item?.author}</StyledText>
             </View>
           )}
