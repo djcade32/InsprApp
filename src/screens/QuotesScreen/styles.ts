@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     lineHeight: spacing.lg,
     paddingTop: spacing.xxsm,
     paddingHorizontal: spacing.xsm,
-    flex: 1,
   },
   quoteAuthor: {
     color: 'white',
