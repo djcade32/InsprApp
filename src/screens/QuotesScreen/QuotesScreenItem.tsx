@@ -8,14 +8,14 @@ import {IQuote} from '../../interfaces/quotesListInterface';
 import {useNavigation} from '@react-navigation/native';
 import {QuotesScreenItemProp} from '../../navigation/types/HomeStackNavigatorParamList';
 
-const QuotesScreenItem = ({item, color = '', screen = ''}: IQuote) => {
+const QuotesScreenItem = ({item, color = '', screen = '', index}: IQuote) => {
   const navigation = useNavigation<QuotesScreenItemProp>();
   // True if color prop is being used and false if it is not
   const isFavoriteScreen = !!color;
   const isYourQuotesScreen = screen === 'Your quotes';
 
   function navigateToQuoteScreen() {
-    navigation.navigate('QuoteScreen');
+    navigation.navigate('QuoteScreen', {index});
   }
   return (
     <Pressable
@@ -27,9 +27,15 @@ const QuotesScreenItem = ({item, color = '', screen = ''}: IQuote) => {
         isFavoriteScreen || isYourQuotesScreen ? {height: 165} : {},
       ]}
       onPress={navigateToQuoteScreen}>
-      <StyledText numberOfLines={3} style={styles.quoteText}>
-        {item.text}
-      </StyledText>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+        }}>
+        <StyledText numberOfLines={3} style={styles.quoteText}>
+          {item?.quote}
+        </StyledText>
+      </View>
       <View
         style={[
           styles.quoteFooter,
@@ -38,11 +44,11 @@ const QuotesScreenItem = ({item, color = '', screen = ''}: IQuote) => {
             : {},
         ]}>
         <View style={!isFavoriteScreen && {alignSelf: 'center'}}>
-          <StyledText style={styles.quoteAuthor}>- {item.author}</StyledText>
+          <StyledText style={styles.quoteAuthor}>- {item?.author}</StyledText>
           {isFavoriteScreen || isYourQuotesScreen ? (
             <View style={styles.categoryBadgeContainer}>
               <StyledText style={styles.categoryBadgeText}>
-                {item.category}
+                {item?.category}
               </StyledText>
             </View>
           ) : (
