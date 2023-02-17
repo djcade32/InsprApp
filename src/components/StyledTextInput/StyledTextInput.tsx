@@ -15,11 +15,14 @@ const StyledTextInput = ({
   onBlur,
   secureTextEntry = false,
   labelStyle = {},
+  editable = true,
+  placeholderStyle = {},
 }: IStyledTextInputInterface) => {
   return (
     <View>
       <StyledText style={[styles.label, labelStyle]}>{labelText}</StyledText>
       <TextInput
+        editable={editable}
         onBlur={onBlur}
         value={value}
         onChangeText={onChangeText}

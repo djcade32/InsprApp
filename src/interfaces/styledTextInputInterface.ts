@@ -5,9 +5,11 @@ export interface IStyledTextInputInterface {
   placeholder?: string;
   multiline?: boolean;
   containerStyle?: StyleProp<TextStyle>;
+  placeholderStyle?: StyleProp<TextStyle>;
   value: string;
   onChangeText: any;
   onBlur?: any;
   secureTextEntry?: boolean;
   labelStyle?: StyleProp<TextStyle>;
+  editable?: boolean;
 }
