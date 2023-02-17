@@ -4,15 +4,6 @@ import styles from './styles';
 import StyledText from '../StyledText/StyledText';
 import StyledButton from '../StyledButton/StyledButton';
 import colors from '../../theme/colors';
-import {useMutation, useQuery} from '@apollo/client';
-import {
-  GetUserQuery,
-  GetUserQueryVariables,
-  UpdateUserInput,
-  UpdateUserMutation,
-  UpdateUserMutationVariables,
-} from '../../API';
-import {useAuthContext} from '../../contexts/AuthContext';
 import {Auth} from 'aws-amplify';
 
 interface IConfrimEmailModal {
