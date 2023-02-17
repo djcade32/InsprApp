@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   quoteAuthor: {
     fontSize: fonts.size.sm,
     fontWeight: fonts.weight.light,
+    marginBottom: spacing.xxsm,
     color: 'white',
   },
   categoryBadgeContainer: {
