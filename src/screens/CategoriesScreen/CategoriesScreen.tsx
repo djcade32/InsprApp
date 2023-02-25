@@ -1,4 +1,10 @@
-import {View, FlatList, Pressable, ActivityIndicator} from 'react-native';
+import {
+  View,
+  FlatList,
+  Pressable,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
@@ -8,11 +14,18 @@ import {useNavigation} from '@react-navigation/native';
 import CreateCategoryModal from '../../components/CreateCategoryModal/CreateCategoryModal';
 import {CategoriesScreenProp} from '../../navigation/types/HomeStackNavigatorParamList';
 import {useAuthContext} from '../../contexts/AuthContext';
-import {getUser} from './queries';
-import {useQuery} from '@apollo/client';
-import {GetUserQuery, GetUserQueryVariables} from '../../API';
+import {getUser, updateUser} from './queries';
+import {useMutation, useQuery} from '@apollo/client';
+import {
+  GetUserQuery,
+  GetUserQueryVariables,
+  UpdateUserInput,
+  UpdateUserMutation,
+  UpdateUserMutationVariables,
+} from '../../API';
 import colors from '../../theme/colors';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const CategoriesScreen = () => {
   const navigation = useNavigation<CategoriesScreenProp>();
@@ -23,8 +36,34 @@ const CategoriesScreen = () => {
     getUser,
     {variables: {id: userId}},
   );
+  const [runUpdateUser, {loading: updateLoading, error: updateError}] =
+    useMutation<UpdateUserMutation, UpdateUserMutationVariables>(updateUser);
 
+  const user = data?.getUser;
   const categories = data?.getUser?.categories;
+
+  async function deleteCategory(category: string) {
+    if (updateLoading) {
+      return;
+    }
+    const input: UpdateUserInput = {
+      id: userId,
+      categories: categories?.filter(
+        currentCategory => currentCategory !== category,
+      ),
+      _version: user?._version,
+    };
+    try {
+      await runUpdateUser({
+        variables: {
+          input,
+        },
+      });
+    } catch (error) {
+      console.log('Error updating user: ', error);
+      Alert.alert('Oops', 'Error deleting category.');
+    }
+  }
 
   const createButton = (
     <StyledText
@@ -90,6 +129,27 @@ const CategoriesScreen = () => {
             style={styles.categoryContainer}
             onPress={() => navigateToQuotesScreen(item)}>
             <StyledText style={styles.categoryText}>{item}</StyledText>
+            <Entypo
+              name="cross"
+              size={25}
+              color={'white'}
+              style={styles.crossIcon}
+              suppressHighlighting
+              onPress={() => {
+                Alert.alert(
+                  'Are you sure?',
+                  'Deleting categories will also delete its quotes.',
+                  [
+                    {text: 'Cancel', style: 'cancel'},
+                    {
+                      text: 'Yes, delete',
+                      style: 'destructive',
+                      onPress: () => deleteCategory(item),
+                    },
+                  ],
+                );
+              }}
+            />
           </Pressable>
         )}
         numColumns={2}

@@ -1,5 +1,5 @@
 import {View, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import StyledButton from '../../components/StyledButton/StyledButton';
 import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
@@ -33,7 +33,7 @@ const CreateQuoteScreen = () => {
   >([]);
   const [dropdownValue, setDropdownValue] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
-  const {control, handleSubmit, reset, watch} = useForm<CreateQuoteData>();
+  const {control, handleSubmit, reset} = useForm<CreateQuoteData>();
 
   const {data, error, loading} = useQuery<GetUserQuery, GetUserQueryVariables>(
     getUser,
@@ -57,7 +57,9 @@ const CreateQuoteScreen = () => {
       setDropdownItems(prev => [...prev, {label: category, value: category}]);
     });
   }
-  createCategoryList(fetchedCategories);
+  useEffect(() => {
+    createCategoryList(fetchedCategories);
+  }, [fetchedCategories]);
 
   const onCreateQuote = async ({category, author, quote}: CreateQuoteData) => {
     if (creating) {

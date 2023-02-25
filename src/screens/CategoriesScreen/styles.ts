@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
   categoryText: {
     fontSize: fonts.size.lg,
   },
+  crossIcon: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+  },
 });
 
 export default styles;
