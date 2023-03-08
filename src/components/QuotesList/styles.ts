@@ -43,6 +43,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: fonts.size.sm,
   },
+  quotePlaceholder: {
+    width: 320,
+    height: 190,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default styles;

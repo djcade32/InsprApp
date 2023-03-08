@@ -14,11 +14,16 @@ import {useNavigation} from '@react-navigation/native';
 import CreateCategoryModal from '../../components/CreateCategoryModal/CreateCategoryModal';
 import {CategoriesScreenProp} from '../../navigation/types/HomeStackNavigatorParamList';
 import {useAuthContext} from '../../contexts/AuthContext';
-import {getUser, updateUser} from './queries';
+import {getUser, deleteQuote, updateUser} from './queries';
 import {useMutation, useQuery} from '@apollo/client';
 import {
+  DeleteQuoteMutation,
+  DeleteQuoteMutationVariables,
   GetUserQuery,
   GetUserQueryVariables,
+  Quote,
+  QuotesByUserIDAndCreatedAtQuery,
+  QuotesByUserIDAndCreatedAtQueryVariables,
   UpdateUserInput,
   UpdateUserMutation,
   UpdateUserMutationVariables,
@@ -39,6 +44,11 @@ const CategoriesScreen = () => {
   const [runUpdateUser, {loading: updateLoading, error: updateError}] =
     useMutation<UpdateUserMutation, UpdateUserMutationVariables>(updateUser);
 
+  const [runDeleteQuote] = useMutation<
+    DeleteQuoteMutation,
+    DeleteQuoteMutationVariables
+  >(deleteQuote);
+
   const user = data?.getUser;
   const categories = data?.getUser?.categories;
 
@@ -46,6 +56,9 @@ const CategoriesScreen = () => {
     if (updateLoading) {
       return;
     }
+    const categoryQuotes = getQuotesForCategory(category);
+    console.log('quotes: ', categoryQuotes);
+
     const input: UpdateUserInput = {
       id: userId,
       categories: categories?.filter(
@@ -54,6 +67,7 @@ const CategoriesScreen = () => {
       _version: user?._version,
     };
     try {
+      deleteCategoryQuotes(categoryQuotes);
       await runUpdateUser({
         variables: {
           input,
@@ -63,6 +77,23 @@ const CategoriesScreen = () => {
       console.log('Error updating user: ', error);
       Alert.alert('Oops', 'Error deleting category.');
     }
+  }
+
+  function getQuotesForCategory(category: string) {
+    return user?.Quotes?.items.filter(quote => quote?.category === category);
+  }
+
+  function deleteCategoryQuotes(quotes: (Quote | null)[] | undefined) {
+    if (!quotes || quotes.length === 0) {
+      return;
+    }
+    quotes.forEach(async quote => {
+      await runDeleteQuote({
+        variables: {
+          input: {id: quote?.id || '', _version: quote?._version},
+        },
+      });
+    });
   }
 
   const createButton = (

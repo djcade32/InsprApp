@@ -87,7 +87,13 @@ const QuotesScreen = () => {
           )}
         />
       ) : (
-        <NoQuotesMessage />
+        <NoQuotesMessage
+          message={
+            title === 'Favorite'
+              ? 'You have no quotes favorited'
+              : 'You have no quotes created'
+          }
+        />
       )}
     </View>
   );

@@ -23,7 +23,7 @@ import {EditQuoteScreenItemProp} from '../../navigation/types/HomeStackNavigator
 
 const QuoteMenu = ({activeQuote}: {activeQuote: Quote | null}) => {
   const navigation = useNavigation<EditQuoteScreenItemProp>();
-  const [runDeletePost] = useMutation<
+  const [runDeleteQuote] = useMutation<
     DeleteQuoteMutation,
     DeleteQuoteMutationVariables
   >(deleteQuote, {
@@ -32,15 +32,15 @@ const QuoteMenu = ({activeQuote}: {activeQuote: Quote | null}) => {
     },
   });
 
-  function confirmDeletePost() {
+  function confirmDeleteQuote() {
     Alert.alert('Are you sure?', 'Deleting a quote is permanent.', [
       {text: 'Cancel', style: 'cancel'},
-      {text: 'Yes, delete', style: 'destructive', onPress: startDeletePost},
+      {text: 'Yes, delete', style: 'destructive', onPress: startDeleteQuote},
     ]);
   }
-  async function startDeletePost() {
+  async function startDeleteQuote() {
     try {
-      await runDeletePost();
+      await runDeleteQuote();
     } catch (error) {
       Alert.alert('Oops', 'Erorr deleting quote');
       console.log('Erorr deleting quote: ', error);
@@ -64,7 +64,7 @@ const QuoteMenu = ({activeQuote}: {activeQuote: Quote | null}) => {
         <MenuOption onSelect={navigateToEditQuoteScreen}>
           <StyledText style={styles.optionText}>Edit</StyledText>
         </MenuOption>
-        <MenuOption onSelect={confirmDeletePost}>
+        <MenuOption onSelect={confirmDeleteQuote}>
           <StyledText style={[styles.optionText, {color: colors.red}]}>
             Delete
           </StyledText>

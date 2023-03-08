@@ -11,7 +11,7 @@ interface NoQuotesMessageProps {
 
 const NoQuotesMessage = ({
   title = 'No Quotes',
-  message = 'You have no quotes created for this category',
+  message = 'You have no quotes created',
 }: NoQuotesMessageProps) => {
   return (
     <View style={styles.container}>
