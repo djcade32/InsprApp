@@ -69,6 +69,7 @@ const QuotesScreen = () => {
       </View>
     );
   }
+
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
       <HeaderNavigation title={title} />

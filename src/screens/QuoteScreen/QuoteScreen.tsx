@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   Alert,
   FlatList,
+  Share,
   View,
   ViewabilityConfig,
   ViewToken,
@@ -125,6 +126,38 @@ const QuoteScreen = () => {
     },
   );
 
+  const shareHandler = async () => {
+    const message =
+      '"' +
+      activeQuote?.quote +
+      '"\n\n- ' +
+      activeQuote?.author +
+      '\n\nShared with the Inspr App';
+    try {
+      await Share.share({
+        message: message,
+        // const result = await Share.share({
+        //   message:
+        //     'React Native | A framework for building native apps using React',
+      });
+      // if (result.action === Share.sharedAction) {
+      //   if (result.activityType) {
+      //     // shared with activity type of result.activityType
+      //   } else {
+      //     // shared
+      //   }
+      // } else if (result.action === Share.dismissedAction) {
+      //   // dismissed
+      // }
+    } catch (e) {
+      if (Share.dismissedAction) {
+        console.log('Dissmissed!!!!');
+      } else {
+        Alert.alert(e);
+      }
+    }
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <HeaderNavigation />
@@ -183,7 +216,12 @@ const QuoteScreen = () => {
               onPress={onFavoritePress}
               suppressHighlighting
             />
-            <MaterialIcons size={45} name="ios-share" />
+            <MaterialIcons
+              size={45}
+              name="ios-share"
+              onPress={shareHandler}
+              suppressHighlighting
+            />
           </View>
           <View
             style={{
