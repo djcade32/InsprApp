@@ -22,27 +22,36 @@ const region = config.aws_appsync_region;
 const httpLink = createHttpLink({uri: url});
 
 const typePolicies: TypePolicies = {
+  // Query: {
+  //   fields: {
+  //     getUser: {
+  //       merge: (existing = {}, incoming) => {
+  //         return {
+  //           ...existing,
+  //           ...incoming,
+  //           items: [...(existing.items || []), ...incoming.items],
+  //         };
+  //       },
+  //     },
+
+  //     // postsByDate: {
+  //     //   keyArgs: ['createdAt', 'sortDirection', 'filter', 'type'],
+  //     //   merge: (existing = {}, incoming) => {
+  //     //     return {
+  //     //       ...existing,
+  //     //       ...incoming,
+  //     //       items: [...(existing.items || []), ...incoming.items],
+  //     //     };
+  //     //   },
+  //     // },
+  //   },
+  // },
   Query: {
     fields: {
-      getUser: {
-        merge: (existing = {}, incoming) => {
-          return {
-            ...existing,
-            ...incoming,
-            items: [...(existing.items || []), ...incoming.items],
-          };
-        },
+      quotesByUserIDAndCreatedAt: {
+        keyArgs: false,
+        merge: true,
       },
-      // postsByDate: {
-      //   keyArgs: ['createdAt', 'sortDirection', 'filter', 'type'],
-      //   merge: (existing = {}, incoming) => {
-      //     return {
-      //       ...existing,
-      //       ...incoming,
-      //       items: [...(existing.items || []), ...incoming.items],
-      //     };
-      //   },
-      // },
     },
   },
 };

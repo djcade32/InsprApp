@@ -7,6 +7,7 @@ export type HomeStackNavigatorParamList = {
   CategoriesScreen: undefined;
   QuoteScreen: {
     index: number;
+    title: string;
   };
   QuotesScreen: {
     title: string;

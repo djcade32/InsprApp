@@ -13,7 +13,6 @@ import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation
 import StyledText from '../../components/StyledText/StyledText';
 import fonts from '../../theme/fonts';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import spacing from '../../theme/spacing';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../theme/colors';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
@@ -37,6 +36,7 @@ import {Quote} from '../../API';
 
 const QuoteScreen = () => {
   const route = useRoute<QuoteScreenRouteProp>();
+  const title = route.params.title;
   const flatListRef = useRef<FlatList | null>(null);
   const [activeQuoteIndex, setActiveQuoteIndex] = useState(route.params.index);
   const [activeQuoteFavorite, setActiveQuoteFavorite] = useState(false);
@@ -78,9 +78,13 @@ const QuoteScreen = () => {
   }
 
   const quotes =
-    data?.quotesByUserIDAndCreatedAt?.items.filter(quote => !quote?._deleted) ||
-    [];
-
+    (title === 'Favorite quotes'
+      ? data?.quotesByUserIDAndCreatedAt?.items.filter(
+          quote => quote?.favorite && !quote?._deleted,
+        )
+      : data?.quotesByUserIDAndCreatedAt?.items.filter(
+          quote => !quote?._deleted,
+        )) || [];
   if (loading) {
     return (
       <View
@@ -160,7 +164,7 @@ const QuoteScreen = () => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <HeaderNavigation />
+      <HeaderNavigation title={title} />
       <View
         style={{
           flex: 1,

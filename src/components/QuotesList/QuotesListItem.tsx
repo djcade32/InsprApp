@@ -29,7 +29,10 @@ const QuotesListItem = ({item, color = '', index}: IQuote) => {
   >(updateQuote);
 
   function navigateToQuoteScreen() {
-    navigation.navigate('QuoteScreen', {index});
+    navigation.navigate('QuoteScreen', {
+      index,
+      title: !!color ? 'Favorite quotes' : 'Your quotes',
+    });
   }
   async function onFavoritePress() {
     if (!item || updateLoading) {

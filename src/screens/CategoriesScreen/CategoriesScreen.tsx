@@ -22,8 +22,6 @@ import {
   GetUserQuery,
   GetUserQueryVariables,
   Quote,
-  QuotesByUserIDAndCreatedAtQuery,
-  QuotesByUserIDAndCreatedAtQueryVariables,
   UpdateUserInput,
   UpdateUserMutation,
   UpdateUserMutationVariables,
