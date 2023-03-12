@@ -1,7 +1,7 @@
 // This is used within the quoteslist component to display a single quote.
 
 import {View, Pressable, Alert} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../theme/colors';
@@ -19,14 +19,18 @@ import {updateQuote} from './queries';
 
 const QuotesListItem = ({item, color = '', index}: IQuote) => {
   const navigation = useNavigation<QuotesScreenItemProp>();
-  const [isFavorite, setIsFavorite] = useState(item?.favorite);
+  const [isFavorite, setIsFavorite] = useState<boolean | undefined>(undefined);
   // True if color prop is being used and false if it is not
   const overrideColor = !!color;
+
+  useEffect(() => {
+    setIsFavorite(item?.favorite);
+  }, [item]);
 
   const [runUpdateQuote, {loading: updateLoading}] = useMutation<
     UpdateQuoteMutation,
     UpdateQuoteMutationVariables
-  >(updateQuote);
+  >(updateQuote, {refetchQueries: ['QuotesByUserIDAndCreatedAt']});
 
   function navigateToQuoteScreen() {
     navigation.navigate('QuoteScreen', {
@@ -45,8 +49,8 @@ const QuotesListItem = ({item, color = '', index}: IQuote) => {
     };
 
     try {
-      await runUpdateQuote({variables: {input}});
       setIsFavorite(prev => !prev);
+      await runUpdateQuote({variables: {input}});
     } catch (error) {
       Alert.alert('Oops', 'There was an error favoriting this quote.');
       console.log(error);
@@ -70,7 +74,6 @@ const QuotesListItem = ({item, color = '', index}: IQuote) => {
           "{item?.quote}"
         </StyledText>
       </View>
-
       <StyledText style={styles.quoteAuthor}>- {item?.author}</StyledText>
       <View
         style={{

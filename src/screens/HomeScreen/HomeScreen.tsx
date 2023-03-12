@@ -48,7 +48,9 @@ const HomeScreen = () => {
       quote => !quote?._deleted,
     ) || [];
   const favoriteQuotes =
-    quotes?.filter(quote => quote?.favorite && !quote?._deleted) || [];
+    quotesByUserdata?.quotesByUserIDAndCreatedAt?.items.filter(
+      quote => quote?.favorite && !quote?._deleted,
+    ) || [];
 
   if (loading || quotesByUserloading) {
     return (

@@ -42,7 +42,7 @@ const CreateQuoteScreen = () => {
   const [runCreateQuote] = useMutation<
     CreateQuoteMutation,
     CreateQuoteMutationVariables
-  >(createQuote);
+  >(createQuote, {refetchQueries: ['QuotesByUserIDAndCreatedAt']});
 
   const fetchedCategories = data?.getUser?.categories;
 

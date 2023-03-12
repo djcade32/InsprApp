@@ -55,7 +55,6 @@ const CategoriesScreen = () => {
       return;
     }
     const categoryQuotes = getQuotesForCategory(category);
-    console.log('quotes: ', categoryQuotes);
 
     const input: UpdateUserInput = {
       id: userId,

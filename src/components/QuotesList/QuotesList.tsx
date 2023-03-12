@@ -15,7 +15,7 @@ const QuotesList = ({data, color}: IQuotesList) => {
     return (
       <View style={styles.quotePlaceholder}>
         <StyledText style={{color: colors.grey, fontSize: fonts.size.md}}>
-          No quotes saved
+          {color === colors.red ? 'No quotes favorited' : 'No quotes saved'}
         </StyledText>
       </View>
     );
