@@ -52,6 +52,7 @@ const ConfirmEmailScreen = () => {
       style={{
         flex: 1,
         backgroundColor: 'white',
+        paddingTop: spacing.xlg,
       }}>
       <HeaderNavigation title="Confirm email" showBackButton={false} />
       <View style={styles.content}>
