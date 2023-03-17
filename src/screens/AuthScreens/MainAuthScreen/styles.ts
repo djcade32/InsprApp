@@ -6,8 +6,12 @@ import spacing from '../../../theme/spacing';
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: 'white',
     justifyContent: 'space-around',
+  },
+  bgImage: {
+    flex: 1,
+    paddingTop: spacing.xlg,
+    backgroundColor: 'white',
   },
   logo: {
     width: 150,

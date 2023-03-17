@@ -1,4 +1,4 @@
-import {View, Text, Alert} from 'react-native';
+import {View, Text, Alert, ImageBackground} from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
 import HeaderNavigation from '../../../components/HeaderNavigation/HeaderNavigation';
@@ -8,6 +8,7 @@ import {ForgotPasswordScreenProp} from '../../../navigation/types/AuthStackNavig
 import StyledTextInput from '../../../components/StyledTextInput/StyledTextInput';
 import spacing from '../../../theme/spacing';
 import StyledButton from '../../../components/StyledButton/StyledButton';
+import bgImage from '../../../../assets/images/bgs/3-green-circles.png';
 
 const ForgotPasswordScreen = () => {
   const navigation = useNavigation<ForgotPasswordScreenProp>();
@@ -33,28 +34,30 @@ const ForgotPasswordScreen = () => {
     }
   };
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <HeaderNavigation title="Reset your password" />
-      <View
-        style={{
-          paddingHorizontal: spacing.sm,
-          flex: 3 / 4,
-          justifyContent: 'space-around',
-        }}>
-        <StyledTextInput
-          labelText="Email"
-          placeholder="Enter your email"
-          value={emailInput}
-          onChangeText={setEmailInput}
-        />
-        <StyledButton
-          containerStyle={{marginTop: spacing.md}}
-          disabled={!emailInput}
-          text={loading ? 'Sending...' : 'Send'}
-          onPress={onSendPressed}
-        />
+    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+      <View style={{flex: 1}}>
+        <HeaderNavigation title="Reset your password" />
+        <View
+          style={{
+            paddingHorizontal: spacing.sm,
+            flex: 3 / 4,
+            justifyContent: 'space-around',
+          }}>
+          <StyledTextInput
+            labelText="Email"
+            placeholder="Enter your email"
+            value={emailInput}
+            onChangeText={setEmailInput}
+          />
+          <StyledButton
+            containerStyle={{marginTop: spacing.md}}
+            disabled={!emailInput}
+            text={loading ? 'Sending...' : 'Send'}
+            onPress={onSendPressed}
+          />
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 

@@ -1,5 +1,6 @@
 import {
   Alert,
+  ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -16,6 +17,7 @@ import {Auth} from 'aws-amplify';
 import StyledText from '../../../components/StyledText/StyledText';
 import {useNavigation} from '@react-navigation/native';
 import {SigninScreenProp} from '../../../navigation/types/AuthStackNavigatorParamList';
+import bgImage from '../../../../assets/images/bgs/2-red-circles.png';
 
 type SignInData = {
   email: string;
@@ -44,63 +46,65 @@ const SigninScreen = () => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{flex: 1, backgroundColor: 'white'}}>
-        <HeaderNavigation
-          title="Sign into your account"
-          showBackButton={false}
-        />
-        <View style={{flex: 1, justifyContent: 'space-around'}}>
-          <View style={styles.inputForm}>
-            <FormInput
-              name="email"
-              labelText="Email"
-              placeholder="Email"
-              control={control}
-              rules={{required: 'Email is required'}}
-            />
-            <FormInput
-              name="password"
-              labelText="Password"
-              placeholder="Password"
-              control={control}
-              rules={{
-                required: 'Password is required',
-                minLength: {
-                  value: 3,
-                  message: 'Password should be minimum 3 characters long',
-                },
-              }}
-              secureTextEntry
-            />
-            <StyledText
-              style={styles.forgotPasswordButton}
-              onPress={() => {
-                navigation.navigate('ForgotPasswordScreen');
-                reset();
-              }}>
-              Forgot password?
-            </StyledText>
+    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{flex: 1}}>
+          <HeaderNavigation
+            title="Sign into your account"
+            showBackButton={false}
+          />
+          <View style={{flex: 1, justifyContent: 'space-around'}}>
+            <View style={styles.inputForm}>
+              <FormInput
+                name="email"
+                labelText="Email"
+                placeholder="Email"
+                control={control}
+                rules={{required: 'Email is required'}}
+              />
+              <FormInput
+                name="password"
+                labelText="Password"
+                placeholder="Password"
+                control={control}
+                rules={{
+                  required: 'Password is required',
+                  minLength: {
+                    value: 3,
+                    message: 'Password should be minimum 3 characters long',
+                  },
+                }}
+                secureTextEntry
+              />
+              <StyledText
+                style={styles.forgotPasswordButton}
+                onPress={() => {
+                  navigation.navigate('ForgotPasswordScreen');
+                  reset();
+                }}>
+                Forgot password?
+              </StyledText>
+            </View>
+            <View>
+              <StyledButton
+                text={loading ? 'Signing in...' : 'Sign in'}
+                onPress={handleSubmit(onSignInPressed)}
+              />
+              <StyledText
+                style={styles.dontHaveAccountButton}
+                onPress={() => {
+                  navigation.navigate('CreateAccountScreen');
+                  reset();
+                }}>
+                Don't have an account? Create one
+              </StyledText>
+            </View>
           </View>
-          <View>
-            <StyledButton
-              text={loading ? 'Signing in...' : 'Sign in'}
-              onPress={handleSubmit(onSignInPressed)}
-            />
-            <StyledText
-              style={styles.dontHaveAccountButton}
-              onPress={() => {
-                navigation.navigate('CreateAccountScreen');
-                reset();
-              }}>
-              Don't have an account? Create one
-            </StyledText>
-          </View>
-        </View>
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </ImageBackground>
   );
 };
 

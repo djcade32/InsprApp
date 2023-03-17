@@ -1,4 +1,10 @@
-import {ActivityIndicator, FlatList, Pressable, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ImageBackground,
+  Pressable,
+  View,
+} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import StyledText from '../../components/StyledText/StyledText';
@@ -19,6 +25,7 @@ import {
   QuotesByUserIDAndCreatedAtQueryVariables,
 } from '../../API';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
+import bgImage from '../../../assets/images/bgs/3-green-circles.png';
 
 const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenProp>();
@@ -27,7 +34,6 @@ const HomeScreen = () => {
     getUser,
     {variables: {id: userId}},
   );
-
   const {
     data: quotesByUserdata,
     loading: quotesByUserloading,
@@ -41,7 +47,6 @@ const HomeScreen = () => {
       sortDirection: ModelSortDirection.DESC,
     },
   });
-
   const categories = data?.getUser?.categories;
   const quotes =
     quotesByUserdata?.quotesByUserIDAndCreatedAt?.items.filter(
@@ -93,72 +98,76 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.screen}>
-      <HeaderNavigation
-        title="Inspr"
-        showBackButton={false}
-        boldTitle
-        titleSize={fonts.size.xlg}
-      />
-      {/* Categories list */}
-      <View style={styles.categoriesContainer}>
-        <View style={{flexDirection: 'row'}}>
-          <StyledText style={styles.categoriesTitle}>Categories</StyledText>
-          <StyledText
-            style={styles.viewAllButton}
-            onPress={navigateToCategoriesScreen}>
-            View all
-          </StyledText>
-        </View>
-        {categories ? (
-          <FlatList
-            style={styles.categoriesList}
-            data={categories}
-            renderItem={({item}) => {
-              return (
-                <Pressable
-                  style={styles.categoryContainer}
-                  onPress={() => navigateToQuotesScreen(item)}>
-                  <StyledText style={styles.categoryText}>{item}</StyledText>
-                </Pressable>
-              );
-            }}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        ) : (
-          <View style={styles.noCategoriesContainer}>
-            <StyledText style={styles.categoryText}>
-              Tap to create a category
+      <ImageBackground
+        source={bgImage}
+        resizeMode="cover"
+        style={styles.bgImage}>
+        <HeaderNavigation
+          title="Inspr"
+          showBackButton={false}
+          titleSize={fonts.size.xlg}
+        />
+        {/* Categories list */}
+        <View style={styles.categoriesContainer}>
+          <View style={{flexDirection: 'row'}}>
+            <StyledText style={styles.categoriesTitle}>Categories</StyledText>
+            <StyledText
+              style={styles.viewAllButton}
+              onPress={navigateToCategoriesScreen}>
+              View all
             </StyledText>
           </View>
-        )}
-      </View>
-      {/* Your quotes list */}
-      <View style={styles.categoriesContainer}>
-        <View style={{flexDirection: 'row'}}>
-          <StyledText style={styles.categoriesTitle}>Your quotes</StyledText>
-          <StyledText
-            style={styles.viewAllButton}
-            onPress={() => navigateToQuotesScreen('Your quotes')}>
-            View all
-          </StyledText>
+          {categories ? (
+            <FlatList
+              style={styles.categoriesList}
+              data={categories}
+              renderItem={({item}) => {
+                return (
+                  <Pressable
+                    style={styles.categoryContainer}
+                    onPress={() => navigateToQuotesScreen(item)}>
+                    <StyledText style={styles.categoryText}>{item}</StyledText>
+                  </Pressable>
+                );
+              }}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          ) : (
+            <View style={styles.noCategoriesContainer}>
+              <StyledText style={styles.categoryText}>
+                Tap to create a category
+              </StyledText>
+            </View>
+          )}
         </View>
-        <QuotesList data={quotes} />
-      </View>
-      {/* Favorite quotes list */}
-      <View style={styles.categoriesContainer}>
-        <View style={{flexDirection: 'row'}}>
-          <StyledText style={styles.categoriesTitle}>
-            Favorite quotes
-          </StyledText>
-          <StyledText
-            style={styles.viewAllButton}
-            onPress={() => navigateToQuotesScreen('Favorite')}>
-            View all
-          </StyledText>
+        {/* Your quotes list */}
+        <View style={styles.categoriesContainer}>
+          <View style={{flexDirection: 'row'}}>
+            <StyledText style={styles.categoriesTitle}>Your quotes</StyledText>
+            <StyledText
+              style={styles.viewAllButton}
+              onPress={() => navigateToQuotesScreen('Your quotes')}>
+              View all
+            </StyledText>
+          </View>
+          <QuotesList data={quotes} />
         </View>
-        <QuotesList data={favoriteQuotes} color={colors.red} />
-      </View>
+        {/* Favorite quotes list */}
+        <View style={styles.categoriesContainer}>
+          <View style={{flexDirection: 'row'}}>
+            <StyledText style={styles.categoriesTitle}>
+              Favorite quotes
+            </StyledText>
+            <StyledText
+              style={styles.viewAllButton}
+              onPress={() => navigateToQuotesScreen('Favorite')}>
+              View all
+            </StyledText>
+          </View>
+          <QuotesList data={favoriteQuotes} color={colors.red} />
+        </View>
+      </ImageBackground>
     </View>
   );
 };

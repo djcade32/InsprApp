@@ -4,9 +4,12 @@ import spacing from '../../theme/spacing';
 import colors from '../../theme/colors';
 
 const styles = StyleSheet.create({
+  bgImage: {
+    paddingHorizontal: spacing.sm,
+    paddingTop: spacing.xlg,
+  },
   screen: {
     flex: 1,
-    paddingHorizontal: spacing.sm,
     backgroundColor: 'white',
   },
   headerContainer: {

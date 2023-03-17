@@ -6,6 +6,7 @@ import {
   Keyboard,
   Alert,
   ActivityIndicator,
+  ImageBackground,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './styles';
@@ -29,6 +30,7 @@ import FormInput from '../../components/FormInput/FormInput';
 import {useForm} from 'react-hook-form';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
 import ConfirmEmailModal from '../../components/ConfirmEmailModal/ConfirmEmailModal';
+import bgImage from '../../../assets/images/bgs/2-red-circles.png';
 
 const signOutButton = (
   <Pressable>
@@ -139,65 +141,67 @@ const ProfileScreen = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={{flex: 1, backgroundColor: 'white'}}>
-        <HeaderNavigation
-          title="Profile"
-          showBackButton={false}
-          rightButton={signOutButton}
-        />
-        <ConfirmEmailModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-        />
-        <View style={styles.inputForm}>
-          <FormInput
-            editable={isEditing}
-            name="firstName"
-            labelText="First name"
-            placeholder="First name"
-            control={control}
-            rules={{
-              required: 'First name is required',
-              maxLength: {
-                value: 24,
-                message: 'Name should be max 24 characters long',
-              },
-            }}
+    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={{flex: 1}}>
+          <HeaderNavigation
+            title="Profile"
+            showBackButton={false}
+            rightButton={signOutButton}
           />
-          <FormInput
-            editable={isEditing}
-            name="lastName"
-            labelText="Last name"
-            placeholder="Last name"
-            control={control}
-            rules={{
-              required: 'Last name is required',
-              maxLength: {
-                value: 24,
-                message: 'Name should be max 24 characters long',
-              },
-            }}
+          <ConfirmEmailModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
           />
-          <FormInput
-            editable={isEditing}
-            name="email"
-            labelText="Email"
-            placeholder="Email"
-            control={control}
-            rules={{
-              required: 'Email is required',
-              pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
-            }}
-          />
-          <StyledButton
-            text={isEditing ? (updateLoading ? 'Saving...' : 'Save') : 'Edit'}
-            onPress={handleSubmit(onSaveUserPressed)}
-          />
-          <Button title="Delete account" color={colors.grey} />
+          <View style={styles.inputForm}>
+            <FormInput
+              editable={isEditing}
+              name="firstName"
+              labelText="First name"
+              placeholder="First name"
+              control={control}
+              rules={{
+                required: 'First name is required',
+                maxLength: {
+                  value: 24,
+                  message: 'Name should be max 24 characters long',
+                },
+              }}
+            />
+            <FormInput
+              editable={isEditing}
+              name="lastName"
+              labelText="Last name"
+              placeholder="Last name"
+              control={control}
+              rules={{
+                required: 'Last name is required',
+                maxLength: {
+                  value: 24,
+                  message: 'Name should be max 24 characters long',
+                },
+              }}
+            />
+            <FormInput
+              editable={isEditing}
+              name="email"
+              labelText="Email"
+              placeholder="Email"
+              control={control}
+              rules={{
+                required: 'Email is required',
+                pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
+              }}
+            />
+            <StyledButton
+              text={isEditing ? (updateLoading ? 'Saving...' : 'Save') : 'Edit'}
+              onPress={handleSubmit(onSaveUserPressed)}
+            />
+            <Button title="Delete account" color={colors.grey} />
+          </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </ImageBackground>
   );
 };
 

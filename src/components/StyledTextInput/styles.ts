@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.xsm,
     paddingVertical: 10,
     borderRadius: 10,
+    backgroundColor: 'white',
   },
 });
 

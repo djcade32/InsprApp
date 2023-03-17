@@ -4,6 +4,7 @@ import {
   Pressable,
   ActivityIndicator,
   Alert,
+  ImageBackground,
 } from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
@@ -29,6 +30,7 @@ import {
 import colors from '../../theme/colors';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
 import Entypo from 'react-native-vector-icons/Entypo';
+import bgImage from '../../../assets/images/bgs/2-red-circles.png';
 
 const CategoriesScreen = () => {
   const navigation = useNavigation<CategoriesScreenProp>();
@@ -134,55 +136,57 @@ const CategoriesScreen = () => {
     );
   }
   return (
-    <View style={{backgroundColor: 'white'}}>
-      <HeaderNavigation
-        title={'Categories'}
-        rightButton={createButton}
-        showBackButton
-      />
-      <CreateCategoryModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-      />
-      <FlatList
-        style={{height: '100%', paddingTop: spacing.sm}}
-        columnWrapperStyle={{
-          justifyContent: 'space-around',
-          marginBottom: spacing.sm,
-        }}
-        contentContainerStyle={{paddingHorizontal: spacing.xxsm}}
-        data={categories}
-        renderItem={({item}) => (
-          <Pressable
-            style={styles.categoryContainer}
-            onPress={() => navigateToQuotesScreen(item)}>
-            <StyledText style={styles.categoryText}>{item}</StyledText>
-            <Entypo
-              name="cross"
-              size={25}
-              color={'white'}
-              style={styles.crossIcon}
-              suppressHighlighting
-              onPress={() => {
-                Alert.alert(
-                  'Are you sure?',
-                  'Deleting categories will also delete its quotes.',
-                  [
-                    {text: 'Cancel', style: 'cancel'},
-                    {
-                      text: 'Yes, delete',
-                      style: 'destructive',
-                      onPress: () => deleteCategory(item),
-                    },
-                  ],
-                );
-              }}
-            />
-          </Pressable>
-        )}
-        numColumns={2}
-      />
-    </View>
+    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+      <View>
+        <HeaderNavigation
+          title={'Categories'}
+          rightButton={createButton}
+          showBackButton
+        />
+        <CreateCategoryModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
+        <FlatList
+          style={{height: '100%', paddingTop: spacing.sm}}
+          columnWrapperStyle={{
+            justifyContent: 'space-around',
+            marginBottom: spacing.sm,
+          }}
+          contentContainerStyle={{paddingHorizontal: spacing.xxsm}}
+          data={categories}
+          renderItem={({item}) => (
+            <Pressable
+              style={styles.categoryContainer}
+              onPress={() => navigateToQuotesScreen(item)}>
+              <StyledText style={styles.categoryText}>{item}</StyledText>
+              <Entypo
+                name="cross"
+                size={25}
+                color={'white'}
+                style={styles.crossIcon}
+                suppressHighlighting
+                onPress={() => {
+                  Alert.alert(
+                    'Are you sure?',
+                    'Deleting categories will also delete its quotes.',
+                    [
+                      {text: 'Cancel', style: 'cancel'},
+                      {
+                        text: 'Yes, delete',
+                        style: 'destructive',
+                        onPress: () => deleteCategory(item),
+                      },
+                    ],
+                  );
+                }}
+              />
+            </Pressable>
+          )}
+          numColumns={2}
+        />
+      </View>
+    </ImageBackground>
   );
 };
 

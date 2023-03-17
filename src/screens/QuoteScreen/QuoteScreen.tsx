@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   Alert,
   FlatList,
+  ImageBackground,
   Share,
   View,
   ViewabilityConfig,
@@ -33,6 +34,7 @@ import {useRoute} from '@react-navigation/native';
 import {QuoteScreenRouteProp} from '../../navigation/types/HomeStackNavigatorParamList';
 import {updateQuote} from './queries';
 import {Quote} from '../../API';
+import bgImage from '../../../assets/images/bgs/3-red-circles.png';
 
 const QuoteScreen = () => {
   const route = useRoute<QuoteScreenRouteProp>();
@@ -164,106 +166,113 @@ const QuoteScreen = () => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <HeaderNavigation title={title} />
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'space-between',
-        }}>
-        <View style={styles.categoryAndMoreOptionsContainer}>
-          <StyledText style={{fontSize: fonts.size.xlg}}>
-            {activeQuote?.category}
-          </StyledText>
-          <QuoteMenu activeQuote={quotes[activeQuoteIndex]} />
-        </View>
-        <FlatList
-          ref={flatListRef}
-          style={{flexGrow: 1}}
-          data={quotes}
-          renderItem={({item}) => (
-            <View style={styles.quoteContainer}>
-              <StyledText style={styles.quoteText}>"{item?.quote}"</StyledText>
-              <StyledText style={styles.author}>- {item?.author}</StyledText>
-            </View>
-          )}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          viewabilityConfig={viewabilityConfig}
-          onViewableItemsChanged={onViewableItemsChanged.current}
-          initialScrollIndex={route.params.index}
-          onScrollToIndexFailed={error => {
-            if (!flatListRef.current) {
-              return;
-            }
-            flatListRef.current.scrollToOffset({
-              offset: error.averageItemLength * error.index,
-              animated: false,
-            });
-            setTimeout(() => {
-              if (quotes?.length !== 0 && flatListRef.current !== null) {
-                flatListRef.current.scrollToIndex({
-                  index: error.index,
-                  animated: false,
-                });
+      <ImageBackground
+        source={bgImage}
+        resizeMode="cover"
+        style={styles.bgImage}>
+        <HeaderNavigation title={title} />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'space-between',
+          }}>
+          <View style={styles.categoryAndMoreOptionsContainer}>
+            <StyledText style={{fontSize: fonts.size.xlg}}>
+              {activeQuote?.category}
+            </StyledText>
+            <QuoteMenu activeQuote={quotes[activeQuoteIndex]} />
+          </View>
+          <FlatList
+            ref={flatListRef}
+            style={{flexGrow: 1}}
+            data={quotes}
+            renderItem={({item}) => (
+              <View style={styles.quoteContainer}>
+                <StyledText style={styles.quoteText}>
+                  "{item?.quote}"
+                </StyledText>
+                <StyledText style={styles.author}>- {item?.author}</StyledText>
+              </View>
+            )}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            viewabilityConfig={viewabilityConfig}
+            onViewableItemsChanged={onViewableItemsChanged.current}
+            initialScrollIndex={route.params.index}
+            onScrollToIndexFailed={error => {
+              if (!flatListRef.current) {
+                return;
               }
-            }, 100);
-          }}
-        />
+              flatListRef.current.scrollToOffset({
+                offset: error.averageItemLength * error.index,
+                animated: false,
+              });
+              setTimeout(() => {
+                if (quotes?.length !== 0 && flatListRef.current !== null) {
+                  flatListRef.current.scrollToIndex({
+                    index: error.index,
+                    animated: false,
+                  });
+                }
+              }, 100);
+            }}
+          />
 
-        <View style={styles.footer}>
-          <View style={styles.bookmarkAndShareContainer}>
-            <MaterialCommunityIcons
-              size={45}
-              name={activeQuoteFavorite ? 'bookmark' : 'bookmark-outline'}
-              color={colors.mintGreen}
-              onPress={onFavoritePress}
-              suppressHighlighting
-            />
-            <MaterialIcons
-              size={45}
-              name="ios-share"
-              onPress={shareHandler}
-              suppressHighlighting
-            />
-          </View>
-          <View
-            style={{
-              flex: 1 / 2,
-              alignItems: 'center',
-            }}>
-            <AnimatedDotsCarousel
-              length={quotes?.length || 0}
-              currentIndex={activeQuoteIndex}
-              maxIndicators={1}
-              interpolateOpacityAndColor={true}
-              activeIndicatorConfig={{
-                color: colors.black,
-                margin: 3,
-                opacity: 1,
-                size: 10,
-              }}
-              inactiveIndicatorConfig={{
-                color: colors.grey,
-                margin: 3,
-                opacity: 0.5,
-                size: 10,
-              }}
-              decreasingDots={[
-                {
-                  config: {
-                    color: colors.grey,
-                    margin: 3,
-                    opacity: 0.5,
-                    size: 8,
+          <View style={styles.footer}>
+            <View style={styles.bookmarkAndShareContainer}>
+              <MaterialCommunityIcons
+                size={45}
+                name={activeQuoteFavorite ? 'bookmark' : 'bookmark-outline'}
+                color={colors.mintGreen}
+                onPress={onFavoritePress}
+                suppressHighlighting
+              />
+              <MaterialIcons
+                size={45}
+                name="ios-share"
+                onPress={shareHandler}
+                suppressHighlighting
+              />
+            </View>
+            <View
+              style={{
+                flex: 1 / 2,
+                alignItems: 'center',
+              }}>
+              <AnimatedDotsCarousel
+                length={quotes?.length || 0}
+                currentIndex={activeQuoteIndex}
+                maxIndicators={1}
+                interpolateOpacityAndColor={true}
+                activeIndicatorConfig={{
+                  color: colors.black,
+                  margin: 3,
+                  opacity: 1,
+                  size: 10,
+                }}
+                inactiveIndicatorConfig={{
+                  color: colors.grey,
+                  margin: 3,
+                  opacity: 0.5,
+                  size: 10,
+                }}
+                decreasingDots={[
+                  {
+                    config: {
+                      color: colors.grey,
+                      margin: 3,
+                      opacity: 0.5,
+                      size: 8,
+                    },
+                    quantity: 1,
                   },
-                  quantity: 1,
-                },
-              ]}
-            />
+                ]}
+              />
+            </View>
           </View>
         </View>
-      </View>
+      </ImageBackground>
     </View>
   );
 };

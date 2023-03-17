@@ -3,10 +3,14 @@ import fonts from '../../theme/fonts';
 import spacing from '../../theme/spacing';
 
 const styles = StyleSheet.create({
+  bgImage: {
+    flex: 1,
+    paddingTop: spacing.xlg,
+    backgroundColor: 'white',
+  },
   screen: {
     paddingHorizontal: spacing.sm,
     flex: 1,
-    backgroundColor: 'white',
   },
   inputForm: {
     flex: 1,

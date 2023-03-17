@@ -4,6 +4,11 @@ import fonts from '../../theme/fonts';
 import spacing from '../../theme/spacing';
 
 const styles = StyleSheet.create({
+  bgImage: {
+    flex: 1,
+    paddingTop: spacing.xlg,
+    backgroundColor: 'white',
+  },
   quoteContainer: {
     marginVertical: spacing.xsm,
     borderRadius: 10,

@@ -1,4 +1,10 @@
-import {View, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
+import {
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
+  ImageBackground,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import StyledButton from '../../components/StyledButton/StyledButton';
@@ -17,6 +23,7 @@ import CreateCategoryModal from '../../components/CreateCategoryModal/CreateCate
 import FormInput from '../../components/FormInput/FormInput';
 import {useForm} from 'react-hook-form';
 import FormDropdown from '../../components/FormDropdown/FormDropdown';
+import bgImage from '../../../assets/images/bgs/3-tan-circles.png';
 
 type CreateQuoteData = {
   category: string;
@@ -91,65 +98,68 @@ const CreateQuoteScreen = () => {
   };
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-        setOpen(prev => prev === true && false);
-      }}>
-      <View style={styles.screen}>
-        <HeaderNavigation title="Create quote" showBackButton={false} />
-        <CreateCategoryModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-        />
-        <View style={styles.inputForm}>
-          {dropdownItems.length > 0 ? (
-            <FormDropdown
-              open={open}
-              setOpen={setOpen}
-              dropdownValue={dropdownValue}
-              setDropdownValue={setDropdownValue}
-              dropdownItems={dropdownItems}
-              setDropdownItems={setDropdownItems}
-              name="category"
-              labelText="Category"
+    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          console.log('pressed');
+          Keyboard.dismiss();
+          setOpen(prev => prev === true && false);
+        }}>
+        <View style={styles.screen}>
+          <HeaderNavigation title="Create quote" showBackButton={false} />
+          <CreateCategoryModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          />
+          <View style={styles.inputForm}>
+            {dropdownItems.length > 0 ? (
+              <FormDropdown
+                open={open}
+                setOpen={setOpen}
+                dropdownValue={dropdownValue}
+                setDropdownValue={setDropdownValue}
+                dropdownItems={dropdownItems}
+                setDropdownItems={setDropdownItems}
+                name="category"
+                labelText="Category"
+                control={control}
+                rules={{
+                  required: 'Category is required',
+                }}
+              />
+            ) : (
+              <StyledButton
+                containerStyle={{width: 300}}
+                text="Tap to create a category"
+                onPress={() => setModalVisible(!modalVisible)}
+              />
+            )}
+            <FormInput
+              name="author"
+              labelText="Author"
+              placeholder="Who said the quote?"
+              control={control}
+            />
+
+            <FormInput
+              multiline
+              name="quote"
+              labelText="Quote"
+              placeholder="What was said?"
               control={control}
               rules={{
-                required: 'Category is required',
+                required: 'Quote is required',
               }}
             />
-          ) : (
+
             <StyledButton
-              containerStyle={{width: 300}}
-              text="Tap to create a category"
-              onPress={() => setModalVisible(!modalVisible)}
+              text={creating ? 'Creating...' : 'Create'}
+              onPress={handleSubmit(onCreateQuote)}
             />
-          )}
-          <FormInput
-            name="author"
-            labelText="Author"
-            placeholder="Who said the quote?"
-            control={control}
-          />
-
-          <FormInput
-            multiline
-            name="quote"
-            labelText="Quote"
-            placeholder="What was said?"
-            control={control}
-            rules={{
-              required: 'Quote is required',
-            }}
-          />
-
-          <StyledButton
-            text={creating ? 'Creating...' : 'Create'}
-            onPress={handleSubmit(onCreateQuote)}
-          />
+          </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </ImageBackground>
   );
 };
 

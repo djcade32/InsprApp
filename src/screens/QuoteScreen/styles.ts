@@ -4,6 +4,10 @@ import spacing from '../../theme/spacing';
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
+  bgImage: {
+    flex: 1,
+    paddingTop: spacing.xlg,
+  },
   categoryAndMoreOptionsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
