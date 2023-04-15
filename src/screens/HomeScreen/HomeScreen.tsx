@@ -5,7 +5,7 @@ import {
   Pressable,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './styles';
 import StyledText from '../../components/StyledText/StyledText';
 import QuotesList from '../../components/QuotesList/QuotesList';
@@ -26,10 +26,13 @@ import {
 } from '../../API';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
 import bgImage from '../../../assets/images/bgs/3-green-circles.png';
+import StyledButton from '../../components/StyledButton/StyledButton';
+import CreateCategoryModal from '../../components/CreateCategoryModal/CreateCategoryModal';
 
 const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenProp>();
   const {userId} = useAuthContext();
+  const [modalVisible, setModalVisible] = useState(false);
   const {data, error, loading} = useQuery<GetUserQuery, GetUserQueryVariables>(
     getUser,
     {variables: {id: userId}},
@@ -107,6 +110,10 @@ const HomeScreen = () => {
           showBackButton={false}
           titleSize={fonts.size.xlg}
         />
+        <CreateCategoryModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
         {/* Categories list */}
         <View style={styles.categoriesContainer}>
           <View style={{flexDirection: 'row'}}>
@@ -134,11 +141,11 @@ const HomeScreen = () => {
               showsHorizontalScrollIndicator={false}
             />
           ) : (
-            <View style={styles.noCategoriesContainer}>
-              <StyledText style={styles.categoryText}>
-                Tap to create a category
-              </StyledText>
-            </View>
+            <StyledButton
+              containerStyle={{width: 300}}
+              text="Tap to create a category"
+              onPress={() => setModalVisible(!modalVisible)}
+            />
           )}
         </View>
         {/* Your quotes list */}
