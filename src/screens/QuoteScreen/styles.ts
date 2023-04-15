@@ -4,13 +4,20 @@ import spacing from '../../theme/spacing';
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
+  bgImage: {
+    flex: 1,
+    paddingTop: spacing.xlg,
+  },
   categoryAndMoreOptionsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingHorizontal: spacing.xxlg,
   },
   quoteContainer: {
-    width: windowWidth - spacing.xxlg * 2,
+    width: windowWidth,
+    // width: windowWidth - spacing.xxlg * 2,
+    paddingHorizontal: spacing.xxlg,
     justifyContent: 'center',
   },
   quoteText: {
@@ -31,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: spacing.sm,
+    paddingHorizontal: spacing.sm + spacing.xxlg,
   },
 });
 

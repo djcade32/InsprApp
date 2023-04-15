@@ -1,32 +1,26 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import CategoriesScreen from './src/screens/CategoriesScreen/CategoriesScreen';
-import HomeScreen from './src/screens/HomeScreen/HomeScreen';
-import QuoteScreen from './src/screens/QuoteScreen/QuoteScreen';
-import QuotesScreen from './src/screens/QuotesScreen/QuotesScreen';
-import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
+import {SafeAreaView, View} from 'react-native';
 import {MenuProvider} from 'react-native-popup-menu';
-import CreateQuoteScreen from './src/screens/CreateQuoteScreen/CreateQuoteScreen';
-import ProfileScreen from './src/screens/ProfileScreen/ProfileScreen';
+import Navigation from './src/navigation';
+import {Amplify} from 'aws-amplify';
+import awsconfig from './src/aws-exports';
+import AuthContextProvider from './src/contexts/AuthContext';
+import Client from './src/Apollo/Client';
+import spacing from './src/theme/spacing';
+
+Amplify.configure(awsconfig);
 
 const App = () => {
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <View style={{flex: 1}}>
       <MenuProvider>
-        {/* <HomeScreen /> */}
-        {/* <CategoriesScreen /> */}
-        {/* <QuotesScreen title={'Motivation'} /> */}
-        {/* <QuoteScreen /> */}
-        {/* <CreateQuoteScreen /> */}
-        <ProfileScreen />
+        <AuthContextProvider>
+          <Client>
+            <Navigation />
+          </Client>
+        </AuthContextProvider>
       </MenuProvider>
-    </SafeAreaView>
+    </View>
   );
 };
 

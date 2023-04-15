@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
     paddingLeft: spacing.xsm,
+    zIndex: 100,
   },
   rightButton: {
     right: 0,

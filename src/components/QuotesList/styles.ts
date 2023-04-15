@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   quoteAuthor: {
     fontSize: fonts.size.sm,
     fontWeight: fonts.weight.light,
+    marginBottom: spacing.xxsm,
     color: 'white',
   },
   categoryBadgeContainer: {
@@ -41,6 +42,12 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: fonts.size.sm,
+  },
+  quotePlaceholder: {
+    width: 320,
+    height: 190,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

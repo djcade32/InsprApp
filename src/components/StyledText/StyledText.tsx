@@ -13,7 +13,9 @@ const StyledText = (props?: TextProps) => {
   if (Array.isArray(styleProp)) {
     for (const styleObject of styleProp) {
       isColorProp = !!styleObject?.color;
-      break;
+      if (isColorProp) {
+        break;
+      }
     }
   } else {
     isColorProp = !!styleProp?.color;
@@ -21,6 +23,7 @@ const StyledText = (props?: TextProps) => {
 
   return (
     <Text
+      onPress={props?.onPress}
       suppressHighlighting
       numberOfLines={props?.numberOfLines}
       style={[

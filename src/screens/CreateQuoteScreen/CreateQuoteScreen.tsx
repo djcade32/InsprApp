@@ -1,68 +1,165 @@
-import {View, TouchableWithoutFeedback, Keyboard} from 'react-native';
-import React, {useState} from 'react';
+import {
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
+  ImageBackground,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import styles from './styles';
-import StyledText from '../../components/StyledText/StyledText';
-import colors from '../../theme/colors';
-import fonts from '../../theme/fonts';
-import spacing from '../../theme/spacing';
-import DropDownPicker from 'react-native-dropdown-picker';
-import StyledTextInput from '../../components/TextInput/StyledTextInput';
 import StyledButton from '../../components/StyledButton/StyledButton';
+import HeaderNavigation from '../../components/HeaderNavigation/HeaderNavigation';
+import {createQuote, getUser} from './queries';
+import {useMutation, useQuery} from '@apollo/client';
+import {
+  CreateQuoteInput,
+  CreateQuoteMutation,
+  CreateQuoteMutationVariables,
+  GetUserQuery,
+  GetUserQueryVariables,
+} from '../../API';
+import {useAuthContext} from '../../contexts/AuthContext';
+import CreateCategoryModal from '../../components/CreateCategoryModal/CreateCategoryModal';
+import FormInput from '../../components/FormInput/FormInput';
+import {useForm} from 'react-hook-form';
+import FormDropdown from '../../components/FormDropdown/FormDropdown';
+import bgImage from '../../../assets/images/bgs/3-tan-circles.png';
+
+type CreateQuoteData = {
+  category: string;
+  author: string;
+  quote: string;
+};
 
 const CreateQuoteScreen = () => {
+  const {userId} = useAuthContext();
+  const [modalVisible, setModalVisible] = useState(false);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'Art', value: 'art'},
-    {label: 'Beauty', value: 'beauty'},
-    {label: 'Business', value: 'business'},
-    {label: 'Design', value: 'design'},
-    {label: 'Failure', value: 'failure'},
-    {label: 'Finance', value: 'finance'},
-    {label: 'Health', value: 'health'},
-    {label: 'Motivation', value: 'motivation'},
-  ]);
+  const [dropdownItems, setDropdownItems] = useState<
+    {label: string; value: string}[]
+  >([]);
+  const [dropdownValue, setDropdownValue] = useState<string | null>(null);
+  const [creating, setCreating] = useState(false);
+  const {control, handleSubmit, reset} = useForm<CreateQuoteData>();
+
+  const {data, error, loading} = useQuery<GetUserQuery, GetUserQueryVariables>(
+    getUser,
+    {variables: {id: userId}},
+  );
+  const [runCreateQuote] = useMutation<
+    CreateQuoteMutation,
+    CreateQuoteMutationVariables
+  >(createQuote, {refetchQueries: ['QuotesByUserIDAndCreatedAt']});
+
+  const fetchedCategories = data?.getUser?.categories;
+
+  function createCategoryList(categories: string[] | null | undefined) {
+    if (!categories || categories.length < 1) {
+      return;
+    }
+    if (dropdownItems.some(e => e.value.toLowerCase() === 'motivation')) {
+      return;
+    }
+    categories.forEach(category => {
+      setDropdownItems(prev => [...prev, {label: category, value: category}]);
+    });
+  }
+  useEffect(() => {
+    createCategoryList(fetchedCategories);
+  }, [fetchedCategories]);
+
+  const onCreateQuote = async ({category, author, quote}: CreateQuoteData) => {
+    if (creating) {
+      return;
+    }
+    setCreating(true);
+    const input: CreateQuoteInput = {
+      author: author ? author : 'Anonymous',
+      category,
+      quote,
+      favorite: false,
+      userID: userId,
+      allquotesID: userId,
+    };
+
+    try {
+      await runCreateQuote({
+        variables: {
+          input,
+        },
+      });
+      reset();
+      setDropdownValue(null);
+    } catch (e) {
+      Alert.alert('Oopps', (e as Error).message);
+    } finally {
+      setCreating(false);
+    }
+  };
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.screen}>
-        <View style={styles.headerContainer}>
-          <StyledText style={styles.headerTitle}>Create quote</StyledText>
-        </View>
-        <View style={styles.inputForm}>
-          <StyledTextInput
-            labelText="Author (optional)"
-            placeholder="Who said the quote?"
+    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          console.log('pressed');
+          Keyboard.dismiss();
+          setOpen(prev => prev === true && false);
+        }}>
+        <View style={styles.screen}>
+          <HeaderNavigation title="Create quote" showBackButton={false} />
+          <CreateCategoryModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
           />
-          <StyledTextInput
-            multiline
-            labelText="Quote"
-            placeholder="What was said?"
-          />
-          <View>
-            <StyledText style={{fontSize: fonts.size.md, marginBottom: 10}}>
-              Category
-            </StyledText>
-            <DropDownPicker
-              textStyle={{
-                fontSize: fonts.size.md,
-                color: !open && !value ? colors.grey : colors.black,
-              }}
-              open={open}
-              value={value}
-              items={items}
-              setOpen={setOpen}
-              setValue={setValue}
-              setItems={setItems}
-              props={{
-                activeOpacity: 1,
+          <View style={styles.inputForm}>
+            {dropdownItems.length > 0 ? (
+              <FormDropdown
+                open={open}
+                setOpen={setOpen}
+                dropdownValue={dropdownValue}
+                setDropdownValue={setDropdownValue}
+                dropdownItems={dropdownItems}
+                setDropdownItems={setDropdownItems}
+                name="category"
+                labelText="Category"
+                control={control}
+                rules={{
+                  required: 'Category is required',
+                }}
+              />
+            ) : (
+              <StyledButton
+                containerStyle={{width: 300}}
+                text="Tap to create a category"
+                onPress={() => setModalVisible(!modalVisible)}
+              />
+            )}
+            <FormInput
+              name="author"
+              labelText="Author"
+              placeholder="Who said the quote?"
+              control={control}
+            />
+
+            <FormInput
+              multiline
+              name="quote"
+              labelText="Quote"
+              placeholder="What was said?"
+              control={control}
+              rules={{
+                required: 'Quote is required',
               }}
             />
+
+            <StyledButton
+              text={creating ? 'Creating...' : 'Create'}
+              onPress={handleSubmit(onCreateQuote)}
+            />
           </View>
-          <StyledButton text="Create" />
         </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </ImageBackground>
   );
 };
 

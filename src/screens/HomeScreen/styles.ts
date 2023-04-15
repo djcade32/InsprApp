@@ -4,8 +4,13 @@ import spacing from '../../theme/spacing';
 import colors from '../../theme/colors';
 
 const styles = StyleSheet.create({
+  bgImage: {
+    paddingHorizontal: spacing.sm,
+    paddingTop: spacing.xlg,
+  },
   screen: {
-    marginHorizontal: spacing.sm,
+    flex: 1,
+    backgroundColor: 'white',
   },
   headerContainer: {
     paddingTop: spacing.xsm,
@@ -43,6 +48,16 @@ const styles = StyleSheet.create({
   categoryText: {
     textAlign: 'center',
     fontSize: fonts.size.md,
+  },
+  noCategoriesContainer: {
+    backgroundColor: colors.mintGreen,
+    height: 70,
+    justifyContent: 'center',
+    borderRadius: 10,
+    width: 250,
+    alignSelf: 'center',
+    marginHorizontal: -spacing.sm,
+    marginTop: spacing.xsm,
   },
 });
 
