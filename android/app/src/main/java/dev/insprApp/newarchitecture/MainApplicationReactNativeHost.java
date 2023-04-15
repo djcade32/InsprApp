@@ -1,4 +1,4 @@
-package com.insprapp.newarchitecture;
+package dev.insprApp.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.insprapp.BuildConfig;
-import com.insprapp.newarchitecture.components.MainComponentsRegistry;
-import com.insprapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import dev.insprApp.BuildConfig;
+import dev.insprApp.newarchitecture.components.MainComponentsRegistry;
+import dev.insprApp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
