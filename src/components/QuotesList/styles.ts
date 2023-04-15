@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
   },
   categoryBadgeContainer: {
     backgroundColor: colors.mintGreen,
-    width: 100,
     borderRadius: 10,
     justifyContent: 'center',
     height: 25,
+    paddingHorizontal: 5,
   },
   categoryBadgeText: {
     color: 'white',
