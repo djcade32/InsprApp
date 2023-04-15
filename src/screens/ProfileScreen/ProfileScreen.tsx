@@ -18,6 +18,8 @@ import StyledButton from '../../components/StyledButton/StyledButton';
 import {Auth} from 'aws-amplify';
 import {useMutation, useQuery} from '@apollo/client';
 import {
+  DeleteUserMutation,
+  DeleteUserMutationVariables,
   GetUserQuery,
   GetUserQueryVariables,
   UpdateUserInput,
@@ -62,6 +64,8 @@ const ProfileScreen = () => {
   );
   const [runUpdateUser, {loading: updateLoading, error: updateError}] =
     useMutation<UpdateUserMutation, UpdateUserMutationVariables>(updateUser);
+  const [runDeleteUser, {loading: deleteLoading, error: deleteError}] =
+    useMutation<DeleteUserMutation, DeleteUserMutationVariables>(updateUser);
 
   const user = data?.getUser;
   async function onSaveUserPressed({
@@ -102,6 +106,36 @@ const ProfileScreen = () => {
     } finally {
       setIsEditing(prev => !prev);
     }
+  }
+  async function removeAccount() {
+    if (!user) {
+      return;
+    }
+    try {
+      await runDeleteUser({
+        variables: {input: {id: userId, _version: user._version}},
+      });
+      userAuth?.deleteUser(err => {
+        if (err) {
+          console.log(err);
+        }
+        Auth.signOut();
+      });
+      Alert.alert('Removed account successful');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function confirmRemoveAccount() {
+    Alert.alert(
+      'Are you sure?',
+      'Removing your user account is permanent. All data will be lossed.',
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'Yes, remove', style: 'destructive', onPress: removeAccount},
+      ],
+    );
   }
 
   useEffect(() => {
@@ -197,7 +231,11 @@ const ProfileScreen = () => {
               text={isEditing ? (updateLoading ? 'Saving...' : 'Save') : 'Edit'}
               onPress={handleSubmit(onSaveUserPressed)}
             />
-            <Button title="Delete account" color={colors.grey} />
+            <Button
+              title={deleteLoading ? 'Removing account...' : 'Remove account'}
+              color={colors.grey}
+              onPress={confirmRemoveAccount}
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>
