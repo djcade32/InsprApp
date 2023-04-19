@@ -5,7 +5,6 @@ import spacing from '../../theme/spacing';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 50,
     alignItems: 'center',
   },
   title: {
