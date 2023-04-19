@@ -28,6 +28,7 @@ import ApiErrorMessage from '../../components/ApiErrorMessage';
 import bgImage from '../../../assets/images/bgs/3-green-circles.png';
 import StyledButton from '../../components/StyledButton/StyledButton';
 import CreateCategoryModal from '../../components/CreateCategoryModal/CreateCategoryModal';
+import spacing from '../../theme/spacing';
 
 const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenProp>();
@@ -125,7 +126,7 @@ const HomeScreen = () => {
               View all
             </StyledText>
           </View>
-          {categories ? (
+          {categories.length > 0 ? (
             <FlatList
               style={styles.categoriesList}
               data={categories}
@@ -143,7 +144,10 @@ const HomeScreen = () => {
             />
           ) : (
             <StyledButton
-              containerStyle={{width: 300}}
+              containerStyle={{
+                width: 300,
+                marginTop: spacing.md,
+              }}
               text="Tap to create a category"
               onPress={() => setModalVisible(!modalVisible)}
             />
