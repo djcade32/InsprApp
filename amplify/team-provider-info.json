@@ -20,7 +20,66 @@
         "INSPRAppPostConfirmation": {
           "deploymentBucketName": "amplify-insprapp-staging-215308-deployment",
           "s3Key": "amplify-builds/INSPRAppPostConfirmation-6e7750754144376b7046-build.zip"
-        }
+        },
+        "INSPRApp": {}
+      },
+      "api": {
+        "INSPRApp": {}
+      }
+    }
+  },
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-insprapp-develop-183255-authRole",
+      "UnauthRoleArn": "arn:aws:iam::061561016350:role/amplify-insprapp-develop-183255-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::061561016350:role/amplify-insprapp-develop-183255-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-insprapp-develop-183255-deployment",
+      "UnauthRoleName": "amplify-insprapp-develop-183255-unauthRole",
+      "StackName": "amplify-insprapp-develop-183255",
+      "StackId": "arn:aws:cloudformation:us-east-1:061561016350:stack/amplify-insprapp-develop-183255/227b54b0-df02-11ed-9094-0e5e6e89f46f",
+      "AmplifyAppId": "d1qwidhohh5cp5",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-insprapp-develop-183255-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "INSPRApp": {}
+      },
+      "function": {
+        "INSPRAppPostConfirmation": {
+          "deploymentBucketName": "amplify-insprapp-develop-183255-deployment",
+          "s3Key": "amplify-builds/INSPRAppPostConfirmation-6e7750754144376b7046-build.zip"
+        },
+        "INSPRApp": {}
+      },
+      "api": {
+        "INSPRApp": {}
+      }
+    }
+  },
+  "master": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-insprapp-master-184720-authRole",
+      "UnauthRoleArn": "arn:aws:iam::061561016350:role/amplify-insprapp-master-184720-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::061561016350:role/amplify-insprapp-master-184720-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-insprapp-master-184720-deployment",
+      "UnauthRoleName": "amplify-insprapp-master-184720-unauthRole",
+      "StackName": "amplify-insprapp-master-184720",
+      "StackId": "arn:aws:cloudformation:us-east-1:061561016350:stack/amplify-insprapp-master-184720/25d60680-df04-11ed-8dd2-0a4a260a6299",
+      "AmplifyAppId": "d1qwidhohh5cp5",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-insprapp-master-184720-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "INSPRApp": {}
+      },
+      "function": {
+        "INSPRAppPostConfirmation": {
+          "deploymentBucketName": "amplify-insprapp-master-184720-deployment",
+          "s3Key": "amplify-builds/INSPRAppPostConfirmation-6e7750754144376b7046-build.zip"
+        },
+        "INSPRApp": {}
       },
       "api": {
         "INSPRApp": {}
