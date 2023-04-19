@@ -109,6 +109,7 @@ const HomeScreen = () => {
           title="Inspr"
           showBackButton={false}
           titleSize={fonts.size.xlg}
+          spacing={false}
         />
         <CreateCategoryModal
           modalVisible={modalVisible}
