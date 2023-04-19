@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   bgImage: {
     paddingHorizontal: spacing.sm,
     paddingTop: spacing.xlg,
+    flex: 1,
   },
   screen: {
     flex: 1,
@@ -21,9 +22,6 @@ const styles = StyleSheet.create({
     fontWeight: fonts.weight.medium,
     textAlign: 'center',
   },
-  categoriesContainer: {
-    marginBottom: spacing.md,
-  },
   categoriesTitle: {
     fontSize: fonts.size.lg,
   },
@@ -32,6 +30,9 @@ const styles = StyleSheet.create({
     color: colors.grey,
     marginLeft: 'auto',
     alignSelf: 'flex-end',
+  },
+  categoriesContainer: {
+    marginBottom: spacing.md,
   },
   categoryContainer: {
     backgroundColor: colors.mintGreen,
