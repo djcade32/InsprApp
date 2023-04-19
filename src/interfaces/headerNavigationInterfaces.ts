@@ -5,4 +5,5 @@ export interface IHeaderNavigation {
   showBackButton?: boolean;
   boldTitle?: boolean;
   titleSize?: number;
+  spacing?: boolean;
 }

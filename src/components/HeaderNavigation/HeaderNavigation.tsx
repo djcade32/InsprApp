@@ -14,6 +14,7 @@ const HeaderNavigation = ({
   showBackButton = true,
   boldTitle = false,
   titleSize,
+  spacing = true,
 }: IHeaderNavigation) => {
   const navigation = useNavigation();
 
@@ -22,7 +23,7 @@ const HeaderNavigation = ({
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, spacing ? {height: 50} : {}]}>
       {showBackButton && (
         <Pressable style={styles.leftButton}>
           {leftButton ? (

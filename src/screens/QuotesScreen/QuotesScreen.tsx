@@ -82,7 +82,8 @@ const QuotesScreen = () => {
         {quotes.length > 0 ? (
           <FlatList
             showsVerticalScrollIndicator={false}
-            style={{marginHorizontal: spacing.xsm, height: '100%'}}
+            style={{height: '100%'}}
+            contentContainerStyle={{alignItems: 'center'}}
             data={quotes}
             renderItem={({item, index}) => (
               <QuotesScreenItem
