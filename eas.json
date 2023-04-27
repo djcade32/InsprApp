@@ -19,6 +19,12 @@
     "production": {}
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "norman_cade32@yahoo.com",
+        "ascAppId": "6448565489",
+        "appleTeamId": "62V6LN4KWP"
+      }
+    }
   }
 }
