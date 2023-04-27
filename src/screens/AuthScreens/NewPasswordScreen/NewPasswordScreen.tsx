@@ -10,6 +10,7 @@ import {useNavigation} from '@react-navigation/native';
 import StyledButton from '../../../components/StyledButton/StyledButton';
 import colors from '../../../theme/colors';
 import spacing from '../../../theme/spacing';
+import {isIphone14ProMax} from '../../../helpers/helpers';
 type NewPasswordType = {
   email: string;
   code: string;
@@ -38,7 +39,12 @@ const NewPasswordScreen = () => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white', paddingTop: spacing.xlg}}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: 'white',
+        paddingTop: isIphone14ProMax() ? 50 : spacing.xlg,
+      }}>
       <HeaderNavigation title="Reset your Password" showBackButton={false} />
       <View style={styles.content}>
         <View>

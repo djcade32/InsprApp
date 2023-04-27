@@ -12,6 +12,7 @@ import {
   ConfirmEmailScreenRouteProp,
 } from '../../../navigation/types/AuthStackNavigatorParamList';
 import colors from '../../../theme/colors';
+import {isIphone14ProMax} from '../../../helpers/helpers';
 
 const ConfirmEmailScreen = () => {
   const route = useRoute<ConfirmEmailScreenRouteProp>();
@@ -52,7 +53,7 @@ const ConfirmEmailScreen = () => {
       style={{
         flex: 1,
         backgroundColor: 'white',
-        paddingTop: spacing.xlg,
+        paddingTop: isIphone14ProMax() ? 50 : spacing.xlg,
       }}>
       <HeaderNavigation title="Confirm email" showBackButton={false} />
       <View style={styles.content}>

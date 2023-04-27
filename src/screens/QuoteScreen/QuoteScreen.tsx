@@ -35,6 +35,7 @@ import {QuoteScreenRouteProp} from '../../navigation/types/HomeStackNavigatorPar
 import {updateQuote} from './queries';
 import {Quote} from '../../API';
 import bgImage from '../../../assets/images/bgs/3-red-circles.png';
+import {isIphone14ProMax} from '../../helpers/helpers';
 
 const QuoteScreen = () => {
   const route = useRoute<QuoteScreenRouteProp>();
@@ -169,7 +170,10 @@ const QuoteScreen = () => {
       <ImageBackground
         source={bgImage}
         resizeMode="cover"
-        style={styles.bgImage}>
+        style={[
+          styles.bgImage,
+          isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+        ]}>
         <HeaderNavigation title={title} />
         <View
           style={{

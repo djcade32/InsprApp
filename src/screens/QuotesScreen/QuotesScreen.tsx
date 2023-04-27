@@ -18,6 +18,7 @@ import ApiErrorMessage from '../../components/ApiErrorMessage';
 import NoQuotesMessage from '../../components/NoQuotesMessage';
 import bgImage from '../../../assets/images/bgs/3-tan-circles.png';
 import styles from './styles';
+import {isIphone14ProMax} from '../../helpers/helpers';
 
 const QuotesScreen = () => {
   const route = useRoute<QuotesScreenRouteProp>();
@@ -76,7 +77,13 @@ const QuotesScreen = () => {
   }
 
   return (
-    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+    <ImageBackground
+      source={bgImage}
+      resizeMode="cover"
+      style={[
+        styles.bgImage,
+        isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+      ]}>
       <View style={{flex: 1}}>
         <HeaderNavigation title={title} />
         {quotes.length > 0 ? (

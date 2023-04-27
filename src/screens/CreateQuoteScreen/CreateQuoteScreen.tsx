@@ -24,6 +24,7 @@ import FormInput from '../../components/FormInput/FormInput';
 import {useForm} from 'react-hook-form';
 import FormDropdown from '../../components/FormDropdown/FormDropdown';
 import bgImage from '../../../assets/images/bgs/3-tan-circles.png';
+import {isIphone14ProMax} from '../../helpers/helpers';
 
 type CreateQuoteData = {
   category: string;
@@ -98,7 +99,13 @@ const CreateQuoteScreen = () => {
   };
 
   return (
-    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+    <ImageBackground
+      source={bgImage}
+      resizeMode="cover"
+      style={[
+        styles.bgImage,
+        isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+      ]}>
       <TouchableWithoutFeedback
         onPress={() => {
           console.log('pressed');

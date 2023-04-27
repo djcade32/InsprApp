@@ -9,6 +9,7 @@ import StyledTextInput from '../../../components/StyledTextInput/StyledTextInput
 import spacing from '../../../theme/spacing';
 import StyledButton from '../../../components/StyledButton/StyledButton';
 import bgImage from '../../../../assets/images/bgs/3-green-circles.png';
+import {isIphone14ProMax} from '../../../helpers/helpers';
 
 const ForgotPasswordScreen = () => {
   const navigation = useNavigation<ForgotPasswordScreenProp>();
@@ -34,7 +35,13 @@ const ForgotPasswordScreen = () => {
     }
   };
   return (
-    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+    <ImageBackground
+      source={bgImage}
+      resizeMode="cover"
+      style={[
+        styles.bgImage,
+        isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+      ]}>
       <View style={{flex: 1}}>
         <HeaderNavigation title="Reset your password" />
         <View

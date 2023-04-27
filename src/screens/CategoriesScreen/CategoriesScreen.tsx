@@ -31,6 +31,7 @@ import colors from '../../theme/colors';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
 import Entypo from 'react-native-vector-icons/Entypo';
 import bgImage from '../../../assets/images/bgs/2-red-circles.png';
+import {isIphone14ProMax} from '../../helpers/helpers';
 
 const CategoriesScreen = () => {
   const navigation = useNavigation<CategoriesScreenProp>();
@@ -136,7 +137,13 @@ const CategoriesScreen = () => {
     );
   }
   return (
-    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+    <ImageBackground
+      source={bgImage}
+      resizeMode="cover"
+      style={[
+        styles.bgImage,
+        isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+      ]}>
       <View>
         <HeaderNavigation
           title={'Categories'}

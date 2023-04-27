@@ -6,7 +6,6 @@ import {Amplify} from 'aws-amplify';
 import awsconfig from './src/aws-exports';
 import AuthContextProvider from './src/contexts/AuthContext';
 import Client from './src/Apollo/Client';
-import spacing from './src/theme/spacing';
 
 Amplify.configure(awsconfig);
 

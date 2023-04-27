@@ -1,4 +1,9 @@
 {
   "name": "Inspr",
-  "displayName": "Inspr"
+  "displayName": "Inspr",
+  "extra": {
+    "eas": {
+      "projectId": "c2cda37e-102c-42bc-aa16-be76e1b31df0"
+    }
+  }
 }

@@ -33,6 +33,7 @@ import {useForm} from 'react-hook-form';
 import ApiErrorMessage from '../../components/ApiErrorMessage';
 import ConfirmEmailModal from '../../components/ConfirmEmailModal/ConfirmEmailModal';
 import bgImage from '../../../assets/images/bgs/2-red-circles.png';
+import {isIphone14ProMax} from '../../helpers/helpers';
 
 const signOutButton = (
   <Pressable>
@@ -175,7 +176,13 @@ const ProfileScreen = () => {
   }
 
   return (
-    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+    <ImageBackground
+      source={bgImage}
+      resizeMode="cover"
+      style={[
+        styles.bgImage,
+        isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+      ]}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={{flex: 1}}>
           <HeaderNavigation

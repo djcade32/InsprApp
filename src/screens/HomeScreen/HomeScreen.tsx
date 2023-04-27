@@ -29,6 +29,7 @@ import bgImage from '../../../assets/images/bgs/3-green-circles.png';
 import StyledButton from '../../components/StyledButton/StyledButton';
 import CreateCategoryModal from '../../components/CreateCategoryModal/CreateCategoryModal';
 import spacing from '../../theme/spacing';
+import {isIphone14ProMax} from '../../helpers/helpers';
 
 const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenProp>();
@@ -105,7 +106,10 @@ const HomeScreen = () => {
       <ImageBackground
         source={bgImage}
         resizeMode="cover"
-        style={styles.bgImage}>
+        style={[
+          styles.bgImage,
+          isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+        ]}>
         <HeaderNavigation
           title="Inspr"
           showBackButton={false}

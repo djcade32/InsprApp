@@ -18,6 +18,7 @@ import StyledText from '../../../components/StyledText/StyledText';
 import {useNavigation} from '@react-navigation/native';
 import {SigninScreenProp} from '../../../navigation/types/AuthStackNavigatorParamList';
 import bgImage from '../../../../assets/images/bgs/2-red-circles.png';
+import {isIphone14ProMax} from '../../../helpers/helpers';
 
 type SignInData = {
   email: string;
@@ -46,7 +47,13 @@ const SigninScreen = () => {
   };
 
   return (
-    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+    <ImageBackground
+      source={bgImage}
+      resizeMode="cover"
+      style={[
+        styles.bgImage,
+        isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+      ]}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

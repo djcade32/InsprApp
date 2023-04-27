@@ -10,11 +10,18 @@ import {useNavigation} from '@react-navigation/native';
 import {MainAuthScreenProp} from '../../../navigation/types/AuthStackNavigatorParamList';
 import fonts from '../../../theme/fonts';
 import bgImage from '../../../../assets/images/bgs/3-tan-circles.png';
+import {isIphone14ProMax} from '../../../helpers/helpers';
 
 const MainAuthScreen = () => {
   const navigation = useNavigation<MainAuthScreenProp>();
   return (
-    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+    <ImageBackground
+      source={bgImage}
+      resizeMode="cover"
+      style={[
+        styles.bgImage,
+        isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+      ]}>
       <View style={styles.screen}>
         <View style={{alignItems: 'center'}}>
           <Image source={logo} style={styles.logo} />

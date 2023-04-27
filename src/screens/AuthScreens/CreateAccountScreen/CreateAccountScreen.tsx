@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import {CreateAccountScreenProp} from '../../../navigation/types/AuthStackNavigatorParamList';
 import StyledText from '../../../components/StyledText/StyledText';
 import bgImage from '../../../../assets/images/bgs/3-green-circles.png';
+import {isIphone14ProMax} from '../../../helpers/helpers';
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -64,7 +65,13 @@ const CreateAccountScreen = () => {
     }
   };
   return (
-    <ImageBackground source={bgImage} resizeMode="cover" style={styles.bgImage}>
+    <ImageBackground
+      source={bgImage}
+      resizeMode="cover"
+      style={[
+        styles.bgImage,
+        isIphone14ProMax() && [styles.bgImage, {paddingTop: 50}],
+      ]}>
       <View
         style={{
           flex: 1,
