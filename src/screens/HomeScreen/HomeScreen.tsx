@@ -52,7 +52,7 @@ const HomeScreen = () => {
       sortDirection: ModelSortDirection.DESC,
     },
   });
-  const categories = data?.getUser?.categories;
+  const categories = data?.getUser?.categories || [];
   const quotes =
     quotesByUserdata?.quotesByUserIDAndCreatedAt?.items.filter(
       quote => !quote?._deleted,
