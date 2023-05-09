@@ -41,7 +41,7 @@ jobs:
 
       - name: Push backend changes
         run: amplify push -yes
-      - uses: stefanzweifel/git-auto-comit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v4
 
   build-ios:
     name: Install and build ios app (Preview)
