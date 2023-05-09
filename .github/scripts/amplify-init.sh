@@ -27,16 +27,16 @@ if [ -z "$1" ] ; then
   exit 1
 fi
 
-AUTHCONFIG="{\
-  \"facebookAppIdUserPool\":\"${AMPLIFY_FACEBOOK_CLIENT_ID}\",\
-  \"facebookAppSecretUserPool\":\"${AMPLIFY_FACEBOOK_CLIENT_SECRET}\",\
-  \"googleAppIdUserPool\":\"${AMPLIFY_GOOGLE_CLIENT_ID}\",\
-  \"googleAppSecretUserPool\":\"${AMPLIFY_GOOGLE_CLIENT_SECRET}\",\
-}"
+# AUTHCONFIG="{\
+#   \"facebookAppIdUserPool\":\"${AMPLIFY_FACEBOOK_CLIENT_ID}\",\
+#   \"facebookAppSecretUserPool\":\"${AMPLIFY_FACEBOOK_CLIENT_SECRET}\",\
+#   \"googleAppIdUserPool\":\"${AMPLIFY_GOOGLE_CLIENT_ID}\",\
+#   \"googleAppSecretUserPool\":\"${AMPLIFY_GOOGLE_CLIENT_SECRET}\",\
+# }"
 
-CATEGORIES="{\
-  \"auth\":$AUTHCONFIG\
-}"
+# CATEGORIES="{\
+#   \"auth\":$AUTHCONFIG\
+# }"
 
 AWSCLOUDFORMATIONCONFIG="{\
   \"useProfile\":true,\
@@ -70,7 +70,12 @@ FRONTEND="{\
 
 amplify init \
 --amplify $AMPLIFY \
---categories $CATEGORIES \
 --frontend $FRONTEND \
 --providers $PROVIDERS \
 --yes
+# amplify init \
+# --amplify $AMPLIFY \
+# --categories $CATEGORIES \
+# --frontend $FRONTEND \
+# --providers $PROVIDERS \
+# --yes
