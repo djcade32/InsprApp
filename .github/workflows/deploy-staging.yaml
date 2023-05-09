@@ -36,12 +36,12 @@ jobs:
           npm install -g --unsafe-perm @aws-amplify/cli@latest
           echo "amplify version $(amplify --version)"
 
-      -name: Initialize backend environment
+      - name: Initialize backend environment
         run: ./.github/scripts/amplify-init.sh staging
 
-      -name: Push backend changes
+      - name: Push backend changes
         run: amplify push -yes
-      -uses: stefanzweifel/git-auto-comit-action@v4
+      - uses: stefanzweifel/git-auto-comit-action@v4
 
   build-ios:
     name: Install and build ios app (Preview)
