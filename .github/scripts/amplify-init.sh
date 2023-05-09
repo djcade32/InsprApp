@@ -12,15 +12,15 @@ if [ -z "$AWS_REGION" ] ; then
   exit 1
 fi
 
-if [ -z "$AMPLIFY_FACEBOOK_CLIENT_ID" ] && [ -z "$AMPLIFY_FACEBOOK_CLIENT_SECRET" ] ; then
-  echo "You must provide the action with both AMPLIFY_FACEBOOK_CLIENT_ID and AMPLIFY_FACEBOOK_CLIENT_SECRET environment variables in order to deploy"
-  exit 1
-fi
+# if [ -z "$AMPLIFY_FACEBOOK_CLIENT_ID" ] && [ -z "$AMPLIFY_FACEBOOK_CLIENT_SECRET" ] ; then
+#   echo "You must provide the action with both AMPLIFY_FACEBOOK_CLIENT_ID and AMPLIFY_FACEBOOK_CLIENT_SECRET environment variables in order to deploy"
+#   exit 1
+# fi
 
-if [ -z "$AMPLIFY_GOOGLE_CLIENT_ID" ] && [ -z "$AMPLIFY_GOOGLE_CLIENT_SECRET" ] ; then
-  echo "You must provide the action with both AMPLIFY_GOOGLE_CLIENT_ID and AMPLIFY_GOOGLE_CLIENT_SECRET environment variables in order to deploy"
-  exit 1
-fi
+# if [ -z "$AMPLIFY_GOOGLE_CLIENT_ID" ] && [ -z "$AMPLIFY_GOOGLE_CLIENT_SECRET" ] ; then
+#   echo "You must provide the action with both AMPLIFY_GOOGLE_CLIENT_ID and AMPLIFY_GOOGLE_CLIENT_SECRET environment variables in order to deploy"
+#   exit 1
+# fi
 
 if [ -z "$1" ] ; then
   echo "You must provide envName input parameter in order to pull"
